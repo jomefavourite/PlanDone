@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <header class="container">
+      <!-- Nav -->
+      <%- include('./partials/nav.ejs') %>
+
+      <section class="desc__heading">
+        <h2>My Tasks</h2>
+        <div class="desc__content">
+          <div class="desc__search">
+            <img src="../images/search.svg" alt="search icon" />
+            <input
+              class="search"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search Task Name"
+            />
+          </div>
+          <button class="button createNotes" id="">
+            <span class="createNotes__text">Create Tasks</span>
+            <img src="../images/add.svg" alt="add icon" />
+          </button>
+        </div>
+      </section>
+    </header>
+
+    <main class="container">
+      <div class="modal">
+        <form>
+          <div>
+            <input type="text" name="topic" id="topic" placeholder="Topic" />
+            <input type="date" name="date" id="date" />
+            <textarea
+              name=""
+              id="textarea"
+              cols="30"
+              rows="10"
+              placeholder="input your tasks"
+            ></textarea>
+          </div>
+          <button id="addTasks" class="button">Add tasks</button>
+        </form>
+      </div>
+
+      <section class="tasks__container"></section>
+
+      <div class="notFound">
+        <img src="../images/404-1.svg" alt="Not Found" />
+        <h2>No Task Found</h2>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include('./partials/footer.ejs') %> 
+
+    <script type="module" src="../scripts/tasks.js"></script>
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+@use "sass:color";
+
+$noteBackground: (
+  '1': #a80404,
+  '2': #1e1e9b,
+  '3': black,
+  '4': rgb(255, 225, 54),
+  '5': indigo,
+  '6': #1b264f,
+  '7': #274690,
+  '8': #302b27,
+  '9': #302b27,
+  '10': #d66853,
+  '11': #7d4e57,
+  '12': #364156,
+  '14': #cb9cf2,
+  '15': #9e7b9b,
+  '16': #374a67,
+  '17': #241715,
+  '18': #703d57,
+  '19': #ee7674,
+  '20': #987284,
+  '21': #a80404,
+  '22': #1e1e9b,
+  '23': black,
+  '24': gold,
+  '25': indigo,
+  '26': #1b264f,
+  '27': #274690,
+  '28': #302b27,
+  '29': #302b27,
+  '30': #d66853,
+);
+
+// Set text color based on bg
+@function set-text-color($color) {
+  @if (color.lightness($color) > 40%) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+// Set background & text color
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}
+
+@mixin small() {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+@mixin medium() {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+@mixin desktop() {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}

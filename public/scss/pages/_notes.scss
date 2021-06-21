@@ -1,0 +1,137 @@
+@use '../utilities' as util;
+@use "sass:color";
+
+.note {
+  position: relative;
+  border-radius: 10px;
+  padding: 1rem;
+  overflow: hidden;
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  &__write {
+    display: flex;
+    justify-content: space-between;
+
+    * {
+      margin-top: 0 !important;
+    }
+  }
+
+  &__delete {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  input:checked + span {
+    text-decoration: line-through;
+  }
+}
+
+.notes {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.note::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+}
+
+.createNotes,
+.createLinks {
+  display: flex;
+  align-items: center;
+  max-width: 200px;
+  padding: 0.3rem 1rem;
+  border-radius: 10px;
+  margin-left: 5px;
+
+  &__text {
+    display: none;
+  }
+
+  // max-width: 500px;
+  img {
+    // display: block;
+    width: 30px;
+  }
+}
+
+.modal {
+  padding: 2rem;
+
+  & form input,
+  textarea {
+    display: block;
+    width: 100%;
+    resize: vertical;
+    padding: 0.5rem;
+  }
+
+  & form .title {
+    margin: 0;
+  }
+
+  & form button {
+    display: block;
+    width: 100%;
+  }
+
+  * + * {
+    margin-top: 1rem;
+  }
+}
+
+@each $key, $value in util.$noteBackground {
+  .note:nth-of-type(#{$key}) {
+    @include util.set-background($value);
+  }
+
+  .note:nth-of-type(#{$key})::before {
+    background: color.adjust($value, $blackness: 10%);
+  }
+}
+
+.displayNone {
+  display: none !important;
+}
+
+.notFound {
+  display: none;
+  text-align: center;
+  margin: 3rem 0;
+
+  img {
+    max-width: 600px;
+    margin: auto;
+  }
+}
+
+.modal {
+  display: none;
+}
+
+.show {
+  display: block;
+}

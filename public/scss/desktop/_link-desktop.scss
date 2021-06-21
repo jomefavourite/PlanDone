@@ -1,0 +1,9 @@
+@use '../utilities' as util;
+
+@include util.medium() {
+  .links__container {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-flow: row;
+  }
+  
+}

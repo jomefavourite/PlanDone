@@ -1,0 +1,19 @@
+@use '../utilities' as util;
+
+@include util.medium() {
+  .tasks__container {
+    grid-gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .task {
+    display: flex;
+    gap: 10px;
+    // box-shadow: 5px 5px 4px rgba(128, 128, 128, 0.158);
+    padding: 0 20px 20px ;
+
+    & + & {
+      margin-top: 0rem;
+    }
+  }
+}

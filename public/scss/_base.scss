@@ -1,0 +1,176 @@
+// Start of forecaster
+
+$br: 10px;
+$red: rgb(238, 56, 56);
+$maxWidth: 740px;
+$shade: #c5c5c5;
+$size1: 5px;
+$size2: 10px;
+$size3: 15px;
+$size4: 20px;
+$size5: 30px;
+$size6: 40px;
+$position: fixed;
+$tablet: 700px;
+$mobile: 535px;
+$smaller-screens: 310px;
+
+@mixin modalStyle() {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.692);
+  justify-content: center;
+  align-items: center;
+}
+@mixin center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 500px;
+  width: 100%;
+  // background: linear-gradient(45deg, #3964fe, #47c3fd);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+  z-index: -1000;
+
+  & title button {
+    margin-top: $size2;
+  }
+}
+
+// End of forecaster
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  // font-size: clamp(2.2ch, 4vw, 9ch);
+  // font-size: 4.5ch;
+  font-size: 25px;
+  max-width: 435px;
+  margin: 0 auto;
+}
+
+p,
+a,
+pre,
+label {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 18px;
+}
+
+p,
+a {
+  font-weight: 500;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.button {
+  display: inline-block;
+  background: #000;
+  padding: 1rem 2rem;
+  font-family: 'Public Sans';
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 200ms ease-in;
+  font-size: 16px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.change #span1 {
+  transform: rotate(-45deg) translate(-3px, 2px);
+}
+
+.change #span2 {
+  opacity: 0;
+}
+
+.change #span3 {
+  transform: rotate(45deg) translate(-8px, -6px);
+}
+
+.desc {
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+  }
+
+  &__content,
+  &__search {
+    display: flex;
+  }
+
+  &__content {
+    .button {
+      display: flex;
+      align-items: center;
+      padding: 0.3rem 1rem;
+    }
+  }
+
+  &__search {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0 0.5rem;
+
+    .search {
+      padding: 0.5rem;
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+.aboutus-header {
+  height: fit-content !important;
+  height: -moz-fit-content !important;
+}

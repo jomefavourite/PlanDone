@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <header class="container">
+      <!-- Nav -->
+      <%- include('./partials/nav.ejs') %>
+
+      <section class="desc__heading">
+        <h2>My Notes</h2>
+        <div class="desc__content">
+          <div class="desc__search">
+            <img src="../images/search.svg" alt="search icon" />
+            <input
+              class="search"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search Note Topic"
+            />
+          </div>
+          <button class="button createNotes" id="">
+            <span class="createNotes__text">Create Notes</span>
+            <img src="../images/add.svg" alt="add icon" />
+          </button>
+        </div>
+      </section>
+    </header>
+
+    <main class="container">
+      <div class="modal" aria-hidden="true">
+        <form>
+          <input type="text" name="topic" id="topic" placeholder="Topic" />
+          <div>
+            <textarea
+              name=""
+              id="textarea"
+              cols="30"
+              rows="10"
+              placeholder="//Write a note here"
+            ></textarea>
+          </div>
+          <button type="submit" class="button button__add" id="addNote">
+            Add note
+          </button>
+        </form>
+      </div>
+
+      <section class="notes__container"></section>
+
+      <div class="notFound">
+        <img src="../images/404-1.svg" alt="Not Found" />
+        <h2>No Notes Found</h2>
+      </div>
+    </main>
+
+     <!-- Footer -->
+     <%- include('./partials/footer.ejs') %> 
+
+    <script type="module" src="../scripts/notes.js"></script>
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head -->
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <header class="header container" id="home">
+      <!-- Nav -->
+      <%- include('./partials/nav.ejs') %>
+
+      <section class="hero">
+        <div class="hero__bg">
+          <img src="./images/hero-bg.svg" alt="hero background" />
+        </div>
+
+        <div class="hero__contents">
+          <h1>
+            Are You A Student, Looking to step up your daily activity planing?
+          </h1>
+          <p>
+            Well, you’re at the right place, we help you meet your daily needs
+            as a student.
+          </p>
+          <a href="./notes" class="button">Get Started</a>
+        </div>
+      </section>
+
+      <a class="hero__arrow" href="#features">
+        <img src="./images/down-arrow.svg" alt="down arrow" />
+      </a>
+    </header>
+
+    <main class="main container">
+      <section class="aboutus" id="about">
+        <h2>About Us</h2>
+        <p>
+          PlanDone is made for Students who would like to learn smart, be
+          productive and access everything they need while studying in one
+          place.
+        </p>
+        <p>
+          By giving you the ability to save your notes, tasks and lots more,
+          which can be accessed at any time.
+        </p>
+        <p>
+          We aim to give you the best service you can ever ask for. We’ve create
+          this platform for you so make sure you Plan and then complete (Done).
+        </p>
+      </section>
+      <section class="features" id="features">
+        <h2>Features</h2>
+        <!-- Notes Section -->
+        <section class="feature">
+          <img src="./images/notes.svg" alt="create notes" />
+
+          <div class="feature__content">
+            <h3>Create Notes</h3>
+            <p>
+              You can keep your important ideas on the notes, and also access
+              them at any time.
+            </p>
+            <p>
+              You’ll also be able to create as many notes as you want, edit,
+              delete and re-save at your well.
+            </p>
+            <p>
+              Also, the notes are designed with multiple colours, to help you
+              easily identify a particular topic.
+            </p>
+            <a href="./notes" class="button">Start taking Notes</a>
+          </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section class="feature">
+          <img src="./images/tasks.svg" alt="create tasks" />
+
+          <div class="feature__content">
+            <h3>Create Tasks</h3>
+            <p>
+              Create a task you’ll like to be completed with a time frame, and
+              make sure it’s completed.
+            </p>
+            <p>
+              You’ll be able to create as many tasks as you please, edit, delete
+              and re-save at your well.
+            </p>
+            <p>It’s all up to you, start creating your tasks now.</p>
+            <a href="./tasks" class="button">Start creating Tasks</a>
+          </div>
+        </section>
+
+        <!-- CGPA forecaster Section -->
+        <section class="feature">
+          <img src="./images/forecaster.svg" alt="forecast CGPA" />
+          <div class="feature__content">
+            <h3>CGPA Forecaster</h3>
+            <p>
+              You’ll be able to forecast your CGPA score needed to be on either
+              a first, second and third class based on your previous GPA scores.
+            </p>
+            <p>
+              The aim is to help you see what you need to come out with a
+              first-class, so all the best!
+            </p>
+            <a href="./gpa-forecaster" class="button">
+              Click here to Forecast
+            </a>
+          </div>
+        </section>
+
+        <!-- Links Section -->
+        <section class="feature">
+          <img src="./images/links.svg" alt="create links" />
+          <div class="feature__content">
+            <h3>Add usefull links</h3>
+            <p>
+              Do you forget your school portal website frequently? If yes, well,
+              now you don’t need to always remember it.
+            </p>
+            <p>Create links to websites that are is in use daily.</p>
+            <p>
+              By creating a link to various website needed frequently you'll
+              always access them with one click.
+            </p>
+            <a href="./links" class="button">Create Links</a>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <%- include('./partials/footer.ejs') %>
+
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>

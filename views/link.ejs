@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <header class="header container aboutus-header" id="home">
+      <!-- Nav -->
+      <%- include('./partials/nav.ejs') %>
+
+      <section class="desc__heading">
+        <h2>My Links</h2>
+        <div class="desc__content">
+          <div class="desc__search">
+            <img src="../images/search.svg" alt="search icon" />
+            <input
+              class="search"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search Links"
+            />
+          </div>
+          <button class="button createLinks" id="">
+            <span class="createNotes__text">Create Links</span>
+            <img src="../images/add.svg" alt="add icon" />
+          </button>
+        </div>
+      </section>
+    </header>
+
+    <main class="container linker">
+      <div class="modal">
+        <form>
+          <input
+            type="text"
+            name="url"
+            class="title"
+            placeholder="Enter The Title"
+          />
+          <input
+            type="text"
+            name="urlName"
+            id="urlName"
+            placeholder="Enter Url Name"
+          />
+
+          <button type="submit" class="button button__add" id="addLink">
+            Add Link
+          </button>
+        </form>
+      </div>
+
+      <section class="links__container"></section>
+      <div class="notFound">
+        <img src="../images/404-1.svg" alt="Not Found" />
+        <h2>No Notes Found</h2>
+      </div>
+    </main>
+
+     <!-- Footer -->
+     <%- include('./partials/footer.ejs') %> 
+
+    <script type="module" src="../scripts/link.js"></script>
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+@use '../utilities' as util;
+
+@include util.medium() {
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 35px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  .header {
+    height: fit-content;
+    height: -moz-fit-content;
+  }
+
+  .nav {
+    display: block;
+    position: static;
+    top: 0;
+    left: unset;
+    height: fit-content;
+    height: -moz-fit-content;
+    margin-left: auto;
+
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+
+      .hamburger {
+        display: none;
+      }
+    }
+
+    &__list {
+      // display: flex;
+      flex-direction: row;
+      margin-top: unset;
+      justify-content: flex-end;
+
+      &__item {
+        list-style: none;
+        > a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+
+      &__item + &__item {
+        margin-top: 0;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin-top: 3rem;
+
+    &__contents {
+      order: 1;
+      text-align: left;
+      margin: auto 0;
+
+      h1,
+      p {
+        margin-left: 0;
+      }
+    }
+
+    &__bg {
+      order: 2;
+    }
+
+    &__arrow {
+      display: none;
+    }
+  }
+
+  .feature {
+    @include util.grid();
+
+    &__content,
+    img {
+      text-align: left;
+      margin: auto;
+    }
+
+    &:nth-of-type(2n) {
+      .feature__content {
+        order: 1;
+      }
+
+      img {
+        order: 2;
+      }
+    }
+  }
+
+  .footer {
+    &__container {
+      @include util.grid();
+    }
+
+    .logo img {
+      margin-left: 0;
+    }
+
+    &__nav {
+      margin: 3rem auto;
+    }
+
+    .nav {
+      &__list {
+        flex-direction: row;
+        justify-content: flex-start;
+
+        &__item {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &__social {
+      justify-content: flex-end;
+    }
+
+    &__second {
+      margin: 0;
+
+      p {
+        margin: 3rem auto;
+        text-align: right;
+      }
+    }
+  }
+}

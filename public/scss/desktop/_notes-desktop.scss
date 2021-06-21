@@ -1,0 +1,20 @@
+@use '../utilities' as util;
+
+@include util.medium() {
+  .notes {
+    &__container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .note {
+    // height: 200px;
+  }
+
+  .createNotes {
+    margin-left: 20px;
+    &__text {
+      display: block;
+    }
+  }
+}

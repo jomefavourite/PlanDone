@@ -1,0 +1,24 @@
+.links__container {
+  display: grid;
+  gap: 20px;
+}
+
+.linker {
+  margin-bottom: 5rem;
+}
+
+.link {
+  border: 1px solid rgba(0, 0, 0, 0.198);
+  padding: 2rem;
+  text-align: center;
+
+  img {
+    display: block;
+    width: 60px;
+    margin: auto;
+  }
+
+  h5 {
+    color: #000;
+  }
+}

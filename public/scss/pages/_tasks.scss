@@ -1,0 +1,54 @@
+.modal {
+  input[type='text'] {
+    width: 100%;
+  }
+}
+
+.tasks {
+  &__container {
+    display: grid;
+    margin-bottom: 3rem;
+  }
+}
+
+.task {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px 20px;
+  box-shadow: 0px 5px 8px rgba(128, 128, 128, 0.158);
+
+  & + & {
+    margin-top: 1rem;
+  }
+
+  input[type='checkbox'] {
+    display: block;
+    margin: 13px 0 auto;
+    width: min-content;
+  }
+
+  &__content {
+    > * + * {
+      margin-top: 0.4rem;
+    }
+
+    h2 {
+      font-size: unset;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    [contenteditable='true'] {
+      border: 2px solid black;
+    }
+  }
+
+  .edit {
+    align-self: center;
+    margin-left: auto;
+  }
+}

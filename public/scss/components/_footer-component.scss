@@ -1,0 +1,63 @@
+.footer {
+  background: #000;
+  padding: 5rem 0;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+
+  .logo img {
+    max-width: 121px;
+    margin: 0 auto;
+  }
+
+  &__nav {
+    margin: 2rem auto;
+  }
+
+  .nav {
+    &__list {
+      margin: 0 auto;
+      flex-direction: column;
+
+      &__item {
+        margin-left: 0;
+        margin-top: 1rem;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &__social {
+    display: flex;
+    justify-content: center;
+    img {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+
+    a + a {
+      margin-left: 10px;
+    }
+  }
+
+  &__second {
+    margin: 3rem auto;
+
+    > * + * {
+      margin: 2rem auto;
+    }
+  }
+
+  &__cite {
+    font-size: 1rem;
+    font-style: italic;
+
+    > a {
+      color: #fff;
+    }
+  }
+}
