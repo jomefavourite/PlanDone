@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Public+Sans:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Public+Sans:wght@400;500&display=swap');
 .bg {
   position: absolute;
   top: 0;
@@ -30,7 +30,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
 }
 
@@ -44,7 +44,7 @@ p,
 a,
 pre,
 label {
-  font-family: "Public Sans", sans-serif;
+  font-family: 'Public Sans', sans-serif;
   font-size: 18px;
 }
 
@@ -72,7 +72,7 @@ img {
   display: inline-block;
   background: #000;
   padding: 1rem 2rem;
-  font-family: "Public Sans";
+  font-family: 'Public Sans';
   border: none;
   color: #fff;
   cursor: pointer;
@@ -102,7 +102,8 @@ img {
   align-items: center;
   margin: 2rem 0;
 }
-.desc__content, .desc__search {
+.desc__content,
+.desc__search {
   display: flex;
 }
 .desc__content .button {
@@ -160,7 +161,7 @@ img {
 }
 .nav__list__item > a::before {
   position: absolute;
-  content: "";
+  content: '';
   left: 0;
   bottom: -1px;
   height: 2px;
@@ -249,7 +250,7 @@ img {
   transition: transform 200ms ease-in;
 }
 .aboutus a::before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -2px;
   width: 100%;
@@ -326,7 +327,7 @@ img {
 }
 
 .note::before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: 0;
@@ -688,7 +689,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
 }
 
@@ -702,7 +703,7 @@ p,
 a,
 pre,
 label {
-  font-family: "Public Sans", sans-serif;
+  font-family: 'Public Sans', sans-serif;
   font-size: 18px;
 }
 
@@ -730,7 +731,7 @@ img {
   display: inline-block;
   background: #000;
   padding: 1rem 2rem;
-  font-family: "Public Sans";
+  font-family: 'Public Sans';
   border: none;
   color: #fff;
   cursor: pointer;
@@ -760,7 +761,8 @@ img {
   align-items: center;
   margin: 2rem 0;
 }
-.desc__content, .desc__search {
+.desc__content,
+.desc__search {
   display: flex;
 }
 .desc__content .button {
@@ -1052,7 +1054,8 @@ kbd {
   background-color: #eee;
   border-radius: 3px;
   border: 1px solid #b4b4b4;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
   color: #333;
   display: inline-block;
   font-size: 0.85em;
@@ -1135,7 +1138,7 @@ kbd {
     top: 12rem;
   }
 }
-.modal input[type=text] {
+.modal input[type='text'] {
   width: 100%;
 }
 
@@ -1153,7 +1156,7 @@ kbd {
 .task + .task {
   margin-top: 1rem;
 }
-.task input[type=checkbox] {
+.task input[type='checkbox'] {
   display: block;
   margin: 13px 0 auto;
   width: min-content;
@@ -1169,7 +1172,7 @@ kbd {
 .task__content p {
   font-size: 16px;
 }
-.task__content [contenteditable=true] {
+.task__content [contenteditable='true'] {
   border: 2px solid black;
 }
 .task .edit {
@@ -1344,7 +1347,7 @@ kbd {
     margin: auto 0;
   }
   .hero__contents h1,
-.hero__contents p {
+  .hero__contents p {
     margin-left: 0;
   }
   .hero__bg {
@@ -1360,7 +1363,7 @@ kbd {
     grid-gap: 10px;
   }
   .feature__content,
-.feature img {
+  .feature img {
     text-align: left;
     margin: auto;
   }
@@ -1432,6 +1435,27 @@ kbd {
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-flow: row;
   }
+}
+
+.hidden-left {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.hidden-right {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.left-column {
+  transition: all 1.5s ease-in-out;
+}
+.right-column {
+  transition: all 1.5s ease-in-out;
+}
+
+.feature {
+  transition: all 1.5s ease-in-out;
 }
 
 /*# sourceMappingURL=style.css.map */
