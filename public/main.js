@@ -35,29 +35,43 @@ features.forEach(feature => {
 });
 
 document.querySelectorAll('.feature__img').forEach(column => {
-  column.classList.add('hidden-left');
+  if (
+    column.getAttribute('alt').includes('create notes') ||
+    column.getAttribute('alt').includes('forecast CGPA')
+  ) {
+    column.classList.add('hidden-left');
+  } else {
+    column.classList.add('hidden-right');
+  }
 });
+
 document.querySelectorAll('.feature__content').forEach(column => {
-  column.classList.add('hidden-right');
+  if (column.id === 'fc1' || column.id === 'fc3') {
+    console.log(column);
+    column.classList.add('hidden-right');
+  } else {
+    column.classList.add('hidden-left');
+  }
 });
 
 function callback(entries, observer) {
   const [entry] = entries;
+  console.log(entry, 'entry');
 
   if (!entry.isIntersecting) return;
 
   //   get the class name of the target section that came into view
-  const curSectionsName = entry.target.getAttribute('class');
+  const curSectionsName = entry.target.getAttribute('id');
 
   //   now target that specific section
-  const curSection = document.querySelector(`.${curSectionsName}`);
+  const curSection = document.querySelector(`#${curSectionsName}`);
   console.log(curSection);
 
-  //   remove the hidden classes (DOM traversing)
+  // remove the hidden classes (DOM traversing)
   curSection.firstElementChild.classList.remove('hidden-left');
-  console.log(curSection.firstElementChild);
+  // console.log(curSection.firstElementChild);
   curSection.lastElementChild.classList.remove('hidden-right');
-  console.log(curSection.lastElementChild);
+  // console.log(curSection.lastElementChild);
 
   observer.unobserve(entry.target);
 }

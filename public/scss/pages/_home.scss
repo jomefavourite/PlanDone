@@ -184,9 +184,11 @@
   img {
     margin: 0 auto 2rem;
     max-width: 15rem;
+    transition: all 1.5s ease-in-out;
   }
 
   &__content {
+    transition: all 1.5s ease-in-out;
     > * + * {
       margin-top: 1rem;
     }

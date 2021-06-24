@@ -174,3 +174,13 @@ img {
   height: fit-content !important;
   height: -moz-fit-content !important;
 }
+
+.hidden-left {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.hidden-right {
+  opacity: 0;
+  transform: translateX(100%);
+}
