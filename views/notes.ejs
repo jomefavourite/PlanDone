@@ -7,7 +7,14 @@
       <%- include('./partials/nav.ejs') %>
 
       <section class="desc__heading">
-        <h2>My Notes</h2>
+        <% if (isAuth) { %> 
+          <h2> <%- firstName %>  Notes</h2>
+          <% console.log(isAuth) %> 
+        <% } else { %> 
+          <h2>My Notes</h2>
+        <% } %> 
+
+
         <div class="desc__content">
           <div class="desc__search">
             <img src="../images/search.svg" alt="search icon" />

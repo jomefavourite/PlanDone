@@ -1,21 +1,34 @@
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const MongoStore = require('connect-mongo');
+const {ensureAuth, ensureGuest} = require('./middleware/auth');
 require('./config/auth');
 
 // Load Config
-dotenv.config({path: './config/config.env'});
+dotenv.config({path: './config/.env'});
 
-// Check if logined in
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-}
+connectDB();
 
 const app = express();
 
 // Session remembers the signed in user
-app.use(session({secret: 'cats'})); // the secret should be in an environment variable
+// Session middleware
+// --------------------------------------------------
+// MongoStore prevents you from being kicked out
+// from being logged in, when ever the code is changed
+// and refreshed on the browser and then save to the DB
+app.use(
+  session({
+    secret: 'cats',
+    store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
+  })
+); // the secret should be in an environment variable
+
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -25,55 +38,64 @@ app.set('view engine', 'ejs');
 // middleware and static files
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+app.get('/', ensureGuest, (req, res) => {
   res.render('index', {
     title: 'PlanDone - Student Productive Website',
-    path: req.route.path,
+    isAuth: req.isAuthenticated(),
   });
 });
 
-app.get('/plandone', isLoggedIn, (req, res) => {
+app.get('/plandone', ensureAuth, (req, res) => {
+  console.log('name', req.user.firstName);
   res.render('index', {
     title: 'PlanDone - Student Productive Website',
-    firstName: req.user.given_name,
+    firstName: req.user.firstName,
     displayName: req.user.displayName,
-    picture: req.user.picture,
-    path: req.route.path,
+    picture: req.user.image,
+    isAuth: req.isAuthenticated(),
   });
 });
 
 app.get('/notes', (req, res) => {
-  res.render('notes', {title: 'Create Notes - PlanDone'});
+  res.render('notes', {
+    title: 'Create Notes - PlanDone',
+    firstName: req.isAuthenticated() ? req.user.firstName : '',
+    isAuth: req.isAuthenticated(),
+  });
 });
 
 app.get('/tasks', (req, res) => {
-  res.render('tasks', {title: 'Create Tasks - PlanDone'});
+  res.render('tasks', {
+    title: 'Create Tasks - PlanDone',
+    isAuth: req.isAuthenticated(),
+  });
 });
 
 app.get('/gpa-forecaster', (req, res) => {
-  res.render('forecaster', {title: 'CGPA Forecaster'});
+  res.render('forecaster', {
+    title: 'CGPA Forecaster',
+    isAuth: req.isAuthenticated(),
+  });
 });
 
 app.get('/links', (req, res) => {
-  res.render('link', {title: 'Create Links - PlanDone'});
+  res.render('link', {
+    title: 'Create Links - PlanDone',
+    isAuth: req.isAuthenticated(),
+  });
 });
 
-app.get(
-  '/auth/google',
-  passport.authenticate('google', {scope: ['email', 'profile']})
-);
+// Auth with Google
+app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
+// Google auth Callback
 app.get(
   '/google/callback',
   passport.authenticate('google', {
     successRedirect: '/plandone',
-    failureRedirect: '/auth/failure',
+    failureRedirect: '/',
   })
 );
-
-app.get('/auth/failure', (req, res) => {
-  res.send('something went wrong');
-});
 
 app.get('/logout', (req, res) => {
   req.logOut();
@@ -84,4 +106,4 @@ app.get('/logout', (req, res) => {
 // 404 page
 // app.use((req, res) => {});
 
-app.listen(3000);
+app.listen(process.env.PORT);

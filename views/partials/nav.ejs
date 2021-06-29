@@ -20,11 +20,11 @@
       <li class="nav__list__item">
         <a href="/links">Links</a>
       </li>
-      <% if (path === '/') { %>
+      <% if (!isAuth) { %>
       <li class="nav__list__item">
         <a href="/auth/google">Sign In</a>
       </li>
-      <% } else if (path === '/plandone') {%>
+      <% } else {%>
       <li class="nav__list__item">
         <a href="/logout">Logout</a>
       </li>

@@ -34,15 +34,15 @@ features.forEach(feature => {
   featureObserver.observe(feature);
 });
 
-const notesImage = document.querySelector(img[(alt = 'create notes')]);
-const gpaImage = document.querySelector(img[(alt = 'forecast CGPA')]);
-const taskImage = document.querySelector(img[(alt = 'create tasks')]);
-const linkImage = document.querySelector(img[(alt = 'create links')]);
+// const notesImage = document.querySelector(img[(alt = 'create notes')]);
+// const gpaImage = document.querySelector(img[(alt = 'forecast CGPA')]);
+// const taskImage = document.querySelector(img[(alt = 'create tasks')]);
+// const linkImage = document.querySelector(img[(alt = 'create links')]);
 
-notesImage.classList.add('hidden-left');
-gpaImage.classList.add('hidden-left');
-taskImage.classList.add('hidden-right');
-linkImage.classList.add('hidden-right');
+// notesImage.classList.add('hidden-left');
+// gpaImage.classList.add('hidden-left');
+// taskImage.classList.add('hidden-right');
+// linkImage.classList.add('hidden-right');
 
 // document.querySelectorAll('.feature__img').forEach(column => {
 //   if (
@@ -59,15 +59,15 @@ linkImage.classList.add('hidden-right');
 //   // }
 // });
 
-const fc1 = document.querySelector('#fc1');
-const fc2 = document.querySelector('#fc2');
-const fc3 = document.querySelector('#fc3');
-const fc4 = document.querySelector('#fc4');
+// const fc1 = document.querySelector('#fc1');
+// const fc2 = document.querySelector('#fc2');
+// const fc3 = document.querySelector('#fc3');
+// const fc4 = document.querySelector('#fc4');
 
-fc1.classList.add('hidden-right');
-fc3.classList.add('hidden-right');
-fc2.classList.add('hidden-left');
-fc4.classList.add('hidden-left');
+// fc1.classList.add('hidden-right');
+// fc3.classList.add('hidden-right');
+// fc2.classList.add('hidden-left');
+// fc4.classList.add('hidden-left');
 
 // document.querySelectorAll('.feature__content').forEach(column => {
 //   if (column.id === 'fc1' || column.id === 'fc3') {
