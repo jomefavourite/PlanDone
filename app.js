@@ -8,8 +8,10 @@ const MongoStore = require('connect-mongo');
 const {ensureAuth, ensureGuest} = require('./middleware/auth');
 require('./config/auth');
 
+const Note = require('./models/Notes');
+
 // Load Config
-dotenv.config({path: './config/.env'});
+dotenv.config({path: './.env'});
 
 connectDB();
 
@@ -24,6 +26,8 @@ const app = express();
 app.use(
   session({
     secret: 'cats',
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
   })
 ); // the secret should be in an environment variable
@@ -46,7 +50,6 @@ app.get('/', ensureGuest, (req, res) => {
 });
 
 app.get('/plandone', ensureAuth, (req, res) => {
-  console.log('name', req.user.firstName);
   res.render('index', {
     title: 'PlanDone - Student Productive Website',
     firstName: req.user.firstName,
