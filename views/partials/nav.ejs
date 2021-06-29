@@ -20,6 +20,15 @@
       <li class="nav__list__item">
         <a href="/links">Links</a>
       </li>
+      <% if (path === '/') { %>
+      <li class="nav__list__item">
+        <a href="/auth/google">Sign In</a>
+      </li>
+      <% } else if (path === '/plandone') {%>
+      <li class="nav__list__item">
+        <a href="/logout">Logout</a>
+      </li>
+      <% } %>
     </ul>
   </div>
 
