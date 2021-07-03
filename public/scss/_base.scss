@@ -61,6 +61,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 h1,
@@ -150,6 +151,7 @@ img {
   }
 
   &__content {
+    position: relative;
     .button {
       display: flex;
       align-items: center;
@@ -166,6 +168,16 @@ img {
       padding: 0.5rem;
       border: none;
       outline: none;
+      display: none;
+    }
+
+    :hover {
+      position: absolute;
+      width: 300px;
+
+      input {
+        display: block;
+      }
     }
   }
 }

@@ -7,7 +7,11 @@
       <%- include('./partials/nav.ejs') %>
 
       <section class="desc__heading">
+        <% if (isAuth) { %>
+        <h2><%- firstName %>'s Tasks</h2>
+        <% } else { %>
         <h2>My Tasks</h2>
+        <% } %>
         <div class="desc__content">
           <div class="desc__search">
             <img src="../images/search.svg" alt="search icon" />
@@ -54,7 +58,7 @@
     </main>
 
     <!-- Footer -->
-    <%- include('./partials/footer.ejs') %> 
+    <%- include('./partials/footer.ejs') %>
 
     <script type="module" src="../scripts/tasks.js"></script>
     <script type="module" src="../main.js"></script>

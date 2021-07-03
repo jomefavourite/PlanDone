@@ -48,14 +48,6 @@
       margin-top: unset;
       justify-content: flex-end;
 
-      &__item {
-        list-style: none;
-        > a {
-          text-decoration: none;
-          color: black;
-        }
-      }
-
       &__item + &__item {
         margin-top: 0;
         margin-left: 20px;

@@ -1,5 +1,5 @@
 <nav class="nav__container">
-  <a href="../index.html" class="logo">
+  <a href="/" class="logo">
     <img src="../images/PlanDone.svg" alt="plan done logo" />
   </a>
 
@@ -21,12 +21,20 @@
         <a href="/links">Links</a>
       </li>
       <% if (!isAuth) { %>
-      <li class="nav__list__item">
-        <a href="/auth/google">Sign In</a>
+      <li class="nav__list__item signIn">
+        <a href="/auth/google">
+          <img src="./images/google.svg" alt="" />
+          Sign In
+        </a>
       </li>
       <% } else {%>
-      <li class="nav__list__item">
-        <a href="/logout">Logout</a>
+      <li class="nav__list__item userImg">
+        <img src="<%- picture %>" alt="<% displayName %> " />
+      </li>
+      <li class="nav__list__item logout">
+        <a href="/logout">
+          <img src="./images/logout.svg" alt="logout icon" />
+        </a>
       </li>
       <% } %>
     </ul>

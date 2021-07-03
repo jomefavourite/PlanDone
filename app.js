@@ -25,7 +25,7 @@ const app = express();
 // and refreshed on the browser and then save to the DB
 app.use(
   session({
-    secret: 'cats',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
@@ -41,6 +41,8 @@ app.set('view engine', 'ejs');
 
 // middleware and static files
 app.use(express.static('public'));
+// Body parser
+app.use(express.urlencoded({extended: true}));
 
 app.get('/', ensureGuest, (req, res) => {
   res.render('index', {
@@ -63,13 +65,31 @@ app.get('/notes', (req, res) => {
   res.render('notes', {
     title: 'Create Notes - PlanDone',
     firstName: req.isAuthenticated() ? req.user.firstName : '',
+    displayName: req.isAuthenticated() ? req.user.displayName : '',
+    picture: req.isAuthenticated() ? req.user.image : '',
     isAuth: req.isAuthenticated(),
   });
+});
+
+app.post('/notes', (req, res) => {
+  // req.body.user = req.user.id;
+  // await Note.create(req.body);
+  console.log(req.body);
+  // res.render('notes', {
+  //   title: 'Create Notes - PlanDone',
+  //   firstName: req.isAuthenticated() ? req.user.firstName : '',
+  //   displayName: req.isAuthenticated() ? req.user.displayName : '',
+  //   picture: req.isAuthenticated() ? req.user.image : '',
+  //   isAuth: req.isAuthenticated(),
+  // });
 });
 
 app.get('/tasks', (req, res) => {
   res.render('tasks', {
     title: 'Create Tasks - PlanDone',
+    firstName: req.isAuthenticated() ? req.user.firstName : '',
+    displayName: req.isAuthenticated() ? req.user.displayName : '',
+    picture: req.isAuthenticated() ? req.user.image : '',
     isAuth: req.isAuthenticated(),
   });
 });
@@ -77,6 +97,9 @@ app.get('/tasks', (req, res) => {
 app.get('/gpa-forecaster', (req, res) => {
   res.render('forecaster', {
     title: 'CGPA Forecaster',
+    firstName: req.isAuthenticated() ? req.user.firstName : '',
+    displayName: req.isAuthenticated() ? req.user.displayName : '',
+    picture: req.isAuthenticated() ? req.user.image : '',
     isAuth: req.isAuthenticated(),
   });
 });
@@ -84,6 +107,9 @@ app.get('/gpa-forecaster', (req, res) => {
 app.get('/links', (req, res) => {
   res.render('link', {
     title: 'Create Links - PlanDone',
+    firstName: req.isAuthenticated() ? req.user.firstName : '',
+    displayName: req.isAuthenticated() ? req.user.displayName : '',
+    picture: req.isAuthenticated() ? req.user.image : '',
     isAuth: req.isAuthenticated(),
   });
 });

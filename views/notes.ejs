@@ -8,8 +8,7 @@
 
       <section class="desc__heading">
         <% if (isAuth) { %> 
-          <h2> <%- firstName %>  Notes</h2>
-          <% console.log(isAuth) %> 
+          <h2> <%- firstName %>'s  Notes</h2>
         <% } else { %> 
           <h2>My Notes</h2>
         <% } %> 
@@ -36,18 +35,19 @@
 
     <main class="container">
       <div class="modal" aria-hidden="true">
-        <form>
+
+        <form action="/notes" method="POST">
           <input type="text" name="topic" id="topic" placeholder="Topic" />
-          <div>
+         
             <textarea
-              name=""
+              name="description"
               id="textarea"
               cols="30"
               rows="10"
               placeholder="//Write a note here"
             ></textarea>
-          </div>
-          <button type="submit" class="button button__add" id="addNote">
+        
+          <button class="button button__add" id="addNote">
             Add note
           </button>
         </form>
