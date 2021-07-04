@@ -116,6 +116,11 @@
   }
 }
 
+.signInHam {
+  display: flex;
+  gap: 20px;
+}
+
 .hero {
   &__bg {
     > img {

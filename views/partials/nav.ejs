@@ -40,9 +40,19 @@
     </ul>
   </div>
 
-  <button class="hamburger">
-    <span id="span1"></span>
-    <span id="span2"></span>
-    <span id="span3"></span>
-  </button>
+  <div class="signInHam">
+    <% if (!isAuth) { %>
+    <li class="nav__list__item signIn">
+      <a href="/auth/google">
+        <img src="./images/google.svg" alt="" />
+        Sign In
+      </a>
+    </li>
+    <% } %>
+    <button class="hamburger">
+      <span id="span1"></span>
+      <span id="span2"></span>
+      <span id="span3"></span>
+    </button>
+  </div>
 </nav>

@@ -1,3 +1,5 @@
+@use './utilities' as util;
+
 // Start of forecaster
 
 $br: 10px;
@@ -152,6 +154,7 @@ img {
 
   &__content {
     position: relative;
+
     .button {
       display: flex;
       align-items: center;
@@ -160,24 +163,31 @@ img {
   }
 
   &__search {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 0 0.5rem;
-
+    // position: relative;
     .search {
-      padding: 0.5rem;
-      border: none;
-      outline: none;
-      display: none;
+      background: #fff url('../images/search.svg') no-repeat 8px center;
+      border: 1px solid black;
+      border-radius: 10px;
+      width: 40px;
+      padding-left: 25px;
+      color: transparent;
+      cursor: pointer;
+      transition: width 500ms ease-in;
     }
-
-    :hover {
-      position: absolute;
-      width: 300px;
-
-      input {
-        display: block;
-      }
+    .search:focus {
+      // position: absolute;
+      width: 200px;
+      padding-left: 35px;
+      color: #000;
+      cursor: auto;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .desc__search {
+    .search {
+      width: 200px;
+      padding-left: 35px;
     }
   }
 }
