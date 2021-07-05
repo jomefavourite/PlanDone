@@ -104,7 +104,7 @@ function buildTasks(tasks) {
   textArea.value = '';
   tasks.forEach(task => {
     tasksContainer.innerHTML += `
-    <div class="task">
+    <div class="task" data-aos="fade-up">
       <input type="checkbox" id="checkbox" />
       <div class="task__content">
         <h2 contenteditable="false">${task.topic}</h2>

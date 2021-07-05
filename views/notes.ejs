@@ -7,16 +7,14 @@
       <%- include('./partials/nav.ejs') %>
 
       <section class="desc__heading">
-        <% if (isAuth) { %> 
-          <h2> <%- firstName %>'s  Notes</h2>
-        <% } else { %> 
-          <h2>My Notes</h2>
-        <% } %> 
-
+        <% if (isAuth) { %>
+        <h2><%- firstName %>'s Notes</h2>
+        <% } else { %>
+        <h2>My Notes</h2>
+        <% } %>
 
         <div class="desc__content">
           <div class="desc__search">
-            <!-- <img src="../images/search.svg" alt="search icon" /> -->
             <input
               class="search"
               type="search"
@@ -35,21 +33,18 @@
 
     <main class="container">
       <div class="modal" aria-hidden="true">
-
         <form action="/notes" method="POST">
           <input type="text" name="topic" id="topic" placeholder="Topic" />
-         
-            <textarea
-              name="description"
-              id="textarea"
-              cols="30"
-              rows="10"
-              placeholder="//Write a note here"
-            ></textarea>
-        
-          <button class="button button__add" id="addNote">
-            Add note
-          </button>
+
+          <textarea
+            name="description"
+            id="textarea"
+            cols="30"
+            rows="10"
+            placeholder="//Write a note here"
+          ></textarea>
+
+          <button class="button button__add" id="addNote">Add note</button>
         </form>
       </div>
 
@@ -70,7 +65,8 @@
     <script>
       ClassicEditor.create(document.querySelector('#textarea')).catch(error => {
         console.error(error);
-      }); -->
-    </script>
+      });
+    </script> -->
+    <%- include('./partials/aos.ejs') %>
   </body>
 </html>

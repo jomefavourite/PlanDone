@@ -35,7 +35,7 @@ function buildLinks(links) {
   urlName.value = '';
   links.forEach(link => {
     linksContainer.innerHTML += `
-    <a href=${link.urlname}>
+    <a href=${link.urlname} data-aos="fade-up">
       <div class="link">
         <img src="../images/www.svg" alt="world wide web" />
         <h5>${link.title}</h5>

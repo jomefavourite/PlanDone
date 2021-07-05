@@ -1,6 +1,5 @@
 import {select, selectAll, checkLocalStorage} from '../util/init.js';
 
-
 const topic = select('#topic');
 const textArea = select('#textarea');
 const btnAdd = select('.button__add');
@@ -52,7 +51,7 @@ function buildNotes(notes) {
   // style="background-color: ${clr || color.value}"
   notes.forEach(note => {
     notesContainer.innerHTML += `
-    <div class="note" >
+    <div class="note" data-aos="fade-up">
       <h2 contenteditable="false">${note.topic}</h2>
       <pre contenteditable="false">${note.description}</pre>
 

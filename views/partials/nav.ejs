@@ -28,11 +28,11 @@
         </a>
       </li>
       <% } else {%>
-      <li class="nav__list__item userImg">
+      <li class="nav__list__item userImg desktopLink">
         <img src="<%- picture %>" alt="<% displayName %> " />
       </li>
       <li class="nav__list__item logout">
-        <a href="/logout">
+        <a href="/logout" title="Log out">
           <img src="./images/logout.svg" alt="logout icon" />
         </a>
       </li>
@@ -47,6 +47,10 @@
         <img src="./images/google.svg" alt="" />
         Sign In
       </a>
+    </li>
+    <% } else {%>
+    <li class="nav__list__item userImg mobileLink">
+      <img src="<%- picture %>" alt="<% displayName %> " />
     </li>
     <% } %>
     <button class="hamburger">

@@ -183,12 +183,25 @@ img {
     }
   }
 }
+
+.desktopLink {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .desc__search {
     .search {
       width: 200px;
       padding-left: 35px;
     }
+  }
+
+  .desktopLink {
+    display: block;
+  }
+
+  .mobileLink {
+    display: none;
   }
 }
 
