@@ -5,8 +5,11 @@
   position: relative;
   border-radius: 10px;
   padding: 1rem;
-  overflow: hidden;
   min-height: 200px;
+  height: 200px;
+  overflow: hidden;
+  word-break: break-word;
+  white-space: normal;
 
   h2 {
     font-size: 18px;
@@ -15,6 +18,10 @@
   p {
     font-size: 14px;
     font-weight: normal;
+  }
+
+  &:hover {
+    overflow-x: auto;
   }
 
   &__write {
