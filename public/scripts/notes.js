@@ -14,9 +14,17 @@ const modal = select('.modal');
 
 // let notes = checkLocalStorage(initialNotes, 'notes');
 
+let notes = [];
+
+ClassicEditor.create(document.querySelector('#textarea')).catch(error => {
+  console.error(error);
+});
+
+console.log(select('.notes__container').dataset);
+
 // buildNotes(notes);
 
-// btnAdd.addEventListener('click', addNotes);
+btnAdd.addEventListener('click', addNotes);
 search.addEventListener('keyup', e => filterNotes(e));
 createNotesBtn.addEventListener('click', () => {
   modal.classList.toggle('show');
@@ -27,43 +35,51 @@ createNotesBtn.addEventListener('click', () => {
 //   }
 // });
 
-// function addNotes(e) {
-//   // e.preventDefault();
-//   if (topic.value.length === 0 && textArea.value.length === 0) {
-//     return alert('Notes cannot be empty');
-//   }
-//   if (textArea.value.length === 0) {
-//     return alert('Description cannot be empty');
-//   }
-//   if (topic.value.length === 0) {
-//     return alert('Topic cannot be empty');
-//   }
-//   notes.push({topic: topic.value, description: textArea.value});
-//   localStorage.setItem('notes', JSON.stringify(notes));
-//   buildNotes(notes);
-// }
+function addNotes(e) {
+  const notesContainer = select('.notes__container');
 
-// function buildNotes(notes) {
-//   const notesContainer = select('.notes__container');
-//   // notesContainer.innerHTML = '';
-//   setTimeout(() => {
-//     topic.value = '';
-//     textArea.value = '';
-//   }, 1000);
-//   // style="background-color: ${clr || color.value}"
-//   notes.forEach(note => {
-//     notesContainer.innerHTML += `
-//     <div class="note" data-aos="fade-up">
-//       <h2 contenteditable="false">${note.topic}</h2>
-//       <pre contenteditable="false">${note.description}</pre>
+  if (notesContainer.dataset.isauth === 'false') {
+    e.preventDefault();
+  }
 
-//       <button class="note__delete">
-//         <img class="delete" src="../images/delete_icon.svg" alt="delete icon" />
-//       </button>
-//     </div>
-//   `;
-//   });
-// }
+  console.log(notesContainer.dataset.isauth);
+  // if (topic.value.length === 0 && textArea.value.length === 0) {
+  //   return alert('Notes cannot be empty');
+  // }
+  // if (textArea.value.length === 0) {
+  //   return alert('Description cannot be empty');
+  // }
+  // if (topic.value.length === 0) {
+  //   return alert('Topic cannot be empty');
+  // }
+  notes.push({topic: topic.value, description: textArea.value});
+  // localStorage.setItem('notes', JSON.stringify(notes));
+  buildNotes(notes);
+}
+
+function buildNotes(notes) {
+  const notesContainer = select('.notes__container');
+
+  console.log(notesContainer.dataset.isAuth);
+  // notesContainer.innerHTML = '';
+  // setTimeout(() => {
+  //   topic.value = '';
+  //   textArea.value = '';
+  // }, 1000);
+  // style="background-color: ${clr || color.value}"
+  notes.forEach(note => {
+    notesContainer.innerHTML += `
+    <div class="note" data-aos="fade-up">
+      <h2>${note.topic}</h2>
+      <pre>${note.description}</pre>
+
+      <button class="note__delete">
+        <img class="delete" src="../images/delete_icon.svg" alt="delete icon" />
+      </button>
+    </div>
+  `;
+  });
+}
 
 // function removeNote(e) {
 //   notes = notes.filter(note => {

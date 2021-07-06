@@ -1,11 +1,12 @@
 @use './base';
+@use './layout/nav';
 @use './pages/home';
 @use './pages/notes';
 @use './pages/forecaster';
 @use './pages/tasks';
 @use './pages/link';
 @use './pages/contact';
-@use './components/footer-component';
+@use './layout/footer';
 @use './desktop/home-desktop';
 @use './desktop/notes-desktop';
 @use './desktop/tasks-desktop';

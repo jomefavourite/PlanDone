@@ -6,6 +6,14 @@
       <!-- Nav -->
       <%- include('./partials/nav.ejs') %>
 
+      <div class="alert">
+        <img src="./images/alarm.svg" alt="alarm" />
+        <h3>
+          Beware your notes added aren't saved, please sign in to save your
+          notes
+        </h3>
+      </div>
+
       <section class="desc__heading">
         <% if (isAuth) { %>
         <h2><%- firstName %>'s Notes</h2>
@@ -48,7 +56,7 @@
         </form>
       </div>
 
-      <section class="notes__container">
+      <section class="notes__container" data-isAuth="<%= isAuth %>">
         <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
         <div class="note" data-aos="fade-up">
           <h2><%= note.topic %></h2>
@@ -84,15 +92,11 @@
     <!-- Footer -->
     <%- include('./partials/footer.ejs') %>
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
     <script type="module" src="../scripts/notes.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
     <script>
-      ClassicEditor.create(document.querySelector('#textarea')).catch(error => {
-        console.error(error);
-      });
-
       function stringToHTML(str) {
         var parser = new DOMParser();
         var doc = parser.parseFromString(str, 'text/html');
