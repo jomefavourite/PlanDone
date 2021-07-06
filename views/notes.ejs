@@ -48,7 +48,32 @@
         </form>
       </div>
 
-      <section class="notes__container"></section>
+      <section class="notes__container">
+        <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
+        <div class="note" data-aos="fade-up">
+          <h2><%= note.topic %></h2>
+          <div><%= note.description %></div>
+
+          <a href="#" class="note__edit">
+            <img src="./images/edit.svg" alt="edit icon" />
+          </a>
+
+          <button class="note__delete">
+            <img
+              class="delete"
+              src="../images/delete_icon.svg"
+              alt="delete icon"
+            />
+          </button>
+        </div>
+        <% })} %>
+      </section>
+      <% if (notes.length === 0) { %>
+      <div class="note__none">
+        <img src="images/note.svg" alt="" />
+        <h3>There are no Notes, Please add a note</h3>
+      </div>
+      <% } %>
 
       <div class="notFound">
         <img src="../images/404-1.svg" alt="Not Found" />
@@ -61,12 +86,18 @@
 
     <script type="module" src="../scripts/notes.js"></script>
     <script type="module" src="../main.js"></script>
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <%- include('./partials/aos.ejs') %>
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
     <script>
       ClassicEditor.create(document.querySelector('#textarea')).catch(error => {
         console.error(error);
       });
-    </script> -->
-    <%- include('./partials/aos.ejs') %>
+
+      function stringToHTML(str) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(str, 'text/html');
+        return doc.body;
+      }
+    </script>
   </body>
 </html>

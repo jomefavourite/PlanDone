@@ -7,70 +7,72 @@ const search = select('.search');
 const createNotesBtn = select('.createNotes');
 const modal = select('.modal');
 
-let initialNotes = [
-  {topic: 'Demo', description: 'Hello everyone'},
-  {topic: 'Hello', description: 'Hello everyone'},
-];
+// let initialNotes = [
+//   {topic: 'Demo', description: 'Hello everyone'},
+//   {topic: 'Hello', description: 'Hello everyone'},
+// ];
 
-let notes = checkLocalStorage(initialNotes, 'notes');
+// let notes = checkLocalStorage(initialNotes, 'notes');
 
-buildNotes(notes);
+// buildNotes(notes);
 
-btnAdd.addEventListener('click', addNotes);
+// btnAdd.addEventListener('click', addNotes);
 search.addEventListener('keyup', e => filterNotes(e));
 createNotesBtn.addEventListener('click', () => {
   modal.classList.toggle('show');
 });
-document.addEventListener('click', e => {
-  if (e.target.classList.value === 'delete') {
-    return removeNote(e.target.parentElement);
-  }
-});
+// document.addEventListener('click', e => {
+//   if (e.target.classList.value === 'delete') {
+//     return removeNote(e.target.parentElement);
+//   }
+// });
 
-function addNotes(e) {
-  e.preventDefault();
-  if (topic.value.length === 0 && textArea.value.length === 0) {
-    return alert('Notes cannot be empty');
-  }
-  if (textArea.value.length === 0) {
-    return alert('Description cannot be empty');
-  }
-  if (topic.value.length === 0) {
-    return alert('Topic cannot be empty');
-  }
-  notes.push({topic: topic.value, description: textArea.value});
-  localStorage.setItem('notes', JSON.stringify(notes));
-  buildNotes(notes);
-}
+// function addNotes(e) {
+//   // e.preventDefault();
+//   if (topic.value.length === 0 && textArea.value.length === 0) {
+//     return alert('Notes cannot be empty');
+//   }
+//   if (textArea.value.length === 0) {
+//     return alert('Description cannot be empty');
+//   }
+//   if (topic.value.length === 0) {
+//     return alert('Topic cannot be empty');
+//   }
+//   notes.push({topic: topic.value, description: textArea.value});
+//   localStorage.setItem('notes', JSON.stringify(notes));
+//   buildNotes(notes);
+// }
 
-function buildNotes(notes) {
-  const notesContainer = select('.notes__container');
-  notesContainer.innerHTML = '';
-  topic.value = '';
-  textArea.value = '';
-  // style="background-color: ${clr || color.value}"
-  notes.forEach(note => {
-    notesContainer.innerHTML += `
-    <div class="note" data-aos="fade-up">
-      <h2 contenteditable="false">${note.topic}</h2>
-      <pre contenteditable="false">${note.description}</pre>
+// function buildNotes(notes) {
+//   const notesContainer = select('.notes__container');
+//   // notesContainer.innerHTML = '';
+//   setTimeout(() => {
+//     topic.value = '';
+//     textArea.value = '';
+//   }, 1000);
+//   // style="background-color: ${clr || color.value}"
+//   notes.forEach(note => {
+//     notesContainer.innerHTML += `
+//     <div class="note" data-aos="fade-up">
+//       <h2 contenteditable="false">${note.topic}</h2>
+//       <pre contenteditable="false">${note.description}</pre>
 
-      <button class="note__delete">
-        <img class="delete" src="../images/delete_icon.svg" alt="delete icon" />
-      </button>
-    </div>
-  `;
-  });
-}
+//       <button class="note__delete">
+//         <img class="delete" src="../images/delete_icon.svg" alt="delete icon" />
+//       </button>
+//     </div>
+//   `;
+//   });
+// }
 
-function removeNote(e) {
-  notes = notes.filter(note => {
-    let topic = e.parentElement.querySelector('h2').textContent;
-    return topic !== note.topic;
-  });
-  buildNotes(notes);
-  localStorage.setItem('notes', JSON.stringify(notes));
-}
+// function removeNote(e) {
+//   notes = notes.filter(note => {
+//     let topic = e.parentElement.querySelector('h2').textContent;
+//     return topic !== note.topic;
+//   });
+//   buildNotes(notes);
+//   localStorage.setItem('notes', JSON.stringify(notes));
+// }
 
 function filterNotes(e) {
   const notes = selectAll('.note');

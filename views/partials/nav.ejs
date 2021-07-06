@@ -20,13 +20,13 @@
       <li class="nav__list__item">
         <a href="/links">Links</a>
       </li>
-      <% if (!isAuth) { %>
-      <li class="nav__list__item signIn">
+      <% if (isAuth === false) { %>
+      <!-- <li class="nav__list__item signIn">
         <a href="/auth/google">
-          <img src="./images/google.svg" alt="" />
+          <img src="./images/google.svg" alt="google icon" />
           Sign In
         </a>
-      </li>
+      </li> -->
       <% } else {%>
       <li class="nav__list__item userImg desktopLink">
         <img src="<%- picture %>" alt="<% displayName %> " />
@@ -41,7 +41,7 @@
   </div>
 
   <div class="signInHam">
-    <% if (!isAuth) { %>
+    <% if (isAuth === false) { %>
     <li class="nav__list__item signIn">
       <a href="/auth/google">
         <img src="./images/google.svg" alt="" />

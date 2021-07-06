@@ -62,26 +62,31 @@ app.get('/plandone', ensureAuth, (req, res) => {
 });
 
 app.get('/notes', (req, res) => {
-  res.render('notes', {
-    title: 'Create Notes - PlanDone',
-    firstName: req.isAuthenticated() ? req.user.firstName : '',
-    displayName: req.isAuthenticated() ? req.user.displayName : '',
-    picture: req.isAuthenticated() ? req.user.image : '',
-    isAuth: req.isAuthenticated(),
-  });
+  Note.find()
+    .then(data => {
+      res.render('notes', {
+        title: 'Create Notes - PlanDone',
+        firstName: req.isAuthenticated() ? req.user.firstName : '',
+        displayName: req.isAuthenticated() ? req.user.displayName : '',
+        picture: req.isAuthenticated() ? req.user.image : '',
+        isAuth: req.isAuthenticated(),
+        notes: req.isAuthenticated() ? data : '',
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.post('/notes', (req, res) => {
-  // req.body.user = req.user.id;
-  // await Note.create(req.body);
-  console.log(req.body);
-  // res.render('notes', {
-  //   title: 'Create Notes - PlanDone',
-  //   firstName: req.isAuthenticated() ? req.user.firstName : '',
-  //   displayName: req.isAuthenticated() ? req.user.displayName : '',
-  //   picture: req.isAuthenticated() ? req.user.image : '',
-  //   isAuth: req.isAuthenticated(),
-  // });
+  const note = new Note(req.body);
+
+  note
+    .save()
+    .then(() => {
+      res.redirect('/notes');
+    })
+    .catch(err => console.error(err));
 });
 
 app.get('/tasks', (req, res) => {
