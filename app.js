@@ -89,6 +89,11 @@ app.post('/notes', (req, res) => {
     .catch(err => console.error(err));
 });
 
+app.delete('/notes', (req, res) => {
+  console.log(req.body);
+  // Blog.findByIdAndDelete(id)
+});
+
 app.get('/tasks', (req, res) => {
   res.render('tasks', {
     title: 'Create Tasks - PlanDone',

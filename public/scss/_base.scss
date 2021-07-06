@@ -253,7 +253,7 @@ img {
   }
 
   @media (min-width: 768px) {
-    display: flex;
+    display: none;
     align-items: center;
     width: 500px;
     height: 80px;
@@ -266,10 +266,12 @@ img {
 
 @keyframes alertTime {
   from {
-    transform-origin: right;
-    transition: transform 0.3s linear;
+    // transform-origin: left;
+    // transition: transform 0.3s linear;
+    width: 100%;
   }
   to {
-    transform: scaleX(0);
+    // transform: scaleX(0);
+    width: 0;
   }
 }

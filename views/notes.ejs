@@ -68,6 +68,7 @@
 
           <button class="note__delete">
             <img
+              data_id="<%= note.id %>"
               class="delete"
               src="../images/delete_icon.svg"
               alt="delete icon"
@@ -102,6 +103,26 @@
         var doc = parser.parseFromString(str, 'text/html');
         return doc.body;
       }
+
+      const deleteIcon = document.querySelector('.note__delete img');
+
+      console.log(deleteIcon);
+
+      deleteIcon.addEventListener('click', e => {
+        const endpoint = `/notes`;
+
+        console.log(1);
+
+        fetch(endpoint, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(deleteIcon.dataset.id),
+        })
+          .then(() => {})
+          .catch(err => console.error(err));
+      });
     </script>
   </body>
 </html>
