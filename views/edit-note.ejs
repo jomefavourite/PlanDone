@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <header class="container"><%- include('./partials/nav.ejs') %></header>
+    <main class="container">
+      <h1>Edit notes</h1>
+      <form action="/notes" method="POST">
+        <input type="hidden" name="_method" value="PUT" />
+        <input
+          type="text"
+          name="topic"
+          id="topic"
+          placeholder="Topic"
+          value="<%= note.topic %>"
+        />
+
+        <textarea
+          name="description"
+          id="textarea"
+          cols="30"
+          rows="10"
+          placeholder="//Write a note here"
+        >
+          <%= note.description %>
+        </textarea>
+
+        <button class="button">Update note</button>
+      </form>
+    </main>
+
+    <script type="module" src="../main.js"></script>
+  </body>
+</html>

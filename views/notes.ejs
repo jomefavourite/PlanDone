@@ -62,7 +62,7 @@
           <h2><%= note.topic %></h2>
           <div><%= note.description %></div>
 
-          <a href="#" class="note__edit">
+          <a href="/notes/edit/<%= note.id %>" class="note__edit">
             <img src="./images/edit.svg" alt="edit icon" />
           </a>
 
@@ -79,7 +79,7 @@
       </section>
       <% if (notes.length === 0) { %>
       <div class="note__none">
-        <img src="images/note.svg" alt="" />
+        <img src="images/note.svg" alt="Add note icon" />
         <h3>There are no Notes, Please add a note</h3>
       </div>
       <% } %>
@@ -106,21 +106,15 @@
 
       const deleteIcon = document.querySelector('.note__delete img');
 
-      console.log(deleteIcon);
-
       deleteIcon.addEventListener('click', e => {
-        const endpoint = `/notes`;
-
-        console.log(1);
+        const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
 
         fetch(endpoint, {
           method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(deleteIcon.dataset.id),
         })
-          .then(() => {})
+          .then(res => {
+            window.location.href = '/notes';
+          })
           .catch(err => console.error(err));
       });
     </script>

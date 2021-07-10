@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const MongoStore = require('connect-mongo');
@@ -40,9 +41,23 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 
 // middleware and static files
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+
 // Body parser
 app.use(express.urlencoded({extended: true}));
+
+// Method Override
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      let method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
 
 app.get('/', ensureGuest, (req, res) => {
   res.render('index', {
@@ -78,6 +93,10 @@ app.get('/notes', (req, res) => {
     });
 });
 
+// app.get('/notes/:id', (req, res) => {
+//   res.redirect('/notes');
+// });
+
 app.post('/notes', (req, res) => {
   const note = new Note(req.body);
 
@@ -89,9 +108,37 @@ app.post('/notes', (req, res) => {
     .catch(err => console.error(err));
 });
 
-app.delete('/notes', (req, res) => {
-  console.log(req.body);
-  // Blog.findByIdAndDelete(id)
+app.delete('/notes/:id', (req, res) => {
+  const id = req.params.id;
+
+  Note.findByIdAndDelete(id)
+    .then(() => {
+      res.json({redirect: '/notes'});
+      // res.redirect('/notes');
+    })
+    .catch(err => console.error(err));
+});
+
+app.get('/notes/edit/:id', (req, res) => {
+  Note.findById(req.params.id).then(result => {
+    res.render('edit-note', {
+      note: result,
+      title: 'Edit note',
+      firstName: req.isAuthenticated() ? req.user.firstName : '',
+      displayName: req.isAuthenticated() ? req.user.displayName : '',
+      picture: req.isAuthenticated() ? req.user.image : '',
+      isAuth: req.isAuthenticated(),
+    });
+  });
+});
+
+app.put('/notes/edit/:id', (req, res) => {
+  let note = Note.findById(req.params.id);
+
+  note = Note.findOneAndUpdate({_id: req.params.id}, req.body, {
+    new: true,
+    runValidators: true,
+  }).then(() => res.redirect('/notes'));
 });
 
 app.get('/tasks', (req, res) => {

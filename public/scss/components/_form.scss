@@ -1,0 +1,23 @@
+.modal {
+  padding: 2rem;
+}
+form input,
+textarea {
+  display: block;
+  width: 100%;
+  resize: vertical;
+  padding: 0.5rem;
+}
+
+form .title {
+  margin: 0;
+}
+
+form button {
+  display: block;
+  width: 100%;
+}
+
+form * + * {
+  margin-top: 1rem;
+}

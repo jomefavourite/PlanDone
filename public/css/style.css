@@ -313,6 +313,31 @@ img {
   gap: 20px;
 }
 
+.modal {
+  padding: 2rem;
+}
+
+form input,
+textarea {
+  display: block;
+  width: 100%;
+  resize: vertical;
+  padding: 0.5rem;
+}
+
+form .title {
+  margin: 0;
+}
+
+form button {
+  display: block;
+  width: 100%;
+}
+
+form * + * {
+  margin-top: 1rem;
+}
+
 .header {
   height: 100vh;
 }
@@ -500,27 +525,6 @@ img {
 .createNotes img,
 .createLinks img {
   width: 30px;
-}
-
-.modal {
-  padding: 2rem;
-}
-.modal form input,
-.modal textarea {
-  display: block;
-  width: 100%;
-  resize: vertical;
-  padding: 0.5rem;
-}
-.modal form .title {
-  margin: 0;
-}
-.modal form button {
-  display: block;
-  width: 100%;
-}
-.modal * + * {
-  margin-top: 1rem;
 }
 
 .note:nth-of-type(1) {
