@@ -41,6 +41,7 @@
 
     <main class="container">
       <div class="modal" aria-hidden="true">
+        <img src="/images/cross.svg" alt="close modal" class="closeModal" />
         <form action="/notes" method="POST">
           <input type="text" name="topic" id="topic" placeholder="Topic" />
 
@@ -104,18 +105,20 @@
         return doc.body;
       }
 
-      const deleteIcon = document.querySelector('.note__delete img');
+      const deleteIcons = document.querySelectorAll('.note__delete img');
 
-      deleteIcon.addEventListener('click', e => {
-        const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
+      deleteIcons.forEach(deleteIcon => {
+        deleteIcon.addEventListener('click', e => {
+          const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
 
-        fetch(endpoint, {
-          method: 'DELETE',
-        })
-          .then(res => {
-            window.location.href = '/notes';
+          fetch(endpoint, {
+            method: 'DELETE',
           })
-          .catch(err => console.error(err));
+            .then(res => {
+              window.location.href = '/notes';
+            })
+            .catch(err => console.error(err));
+        });
       });
     </script>
   </body>

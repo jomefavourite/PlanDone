@@ -1,4 +1,4 @@
-import {select, selectAll, checkLocalStorage} from '../util/init.js';
+import {select, selectAll} from '../util/init.js';
 
 const topic = select('#topic');
 const textArea = select('#textarea');
@@ -6,6 +6,7 @@ const btnAdd = select('.button__add');
 const search = select('.search');
 const createNotesBtn = select('.createNotes');
 const modal = select('.modal');
+const closeModal = select('.closeModal');
 
 // let initialNotes = [
 //   {topic: 'Demo', description: 'Hello everyone'},
@@ -29,6 +30,9 @@ search.addEventListener('keyup', e => filterNotes(e));
 createNotesBtn.addEventListener('click', () => {
   modal.classList.toggle('show');
 });
+closeModal.addEventListener('click', () => {
+  modal.classList.toggle('show');
+});
 // document.addEventListener('click', e => {
 //   if (e.target.classList.value === 'delete') {
 //     return removeNote(e.target.parentElement);
@@ -40,6 +44,9 @@ function addNotes(e) {
 
   if (notesContainer.dataset.isauth === 'false') {
     e.preventDefault();
+    notes.push({topic: topic.value, description: textArea.value});
+    // localStorage.setItem('notes', JSON.stringify(notes));
+    buildNotes(notes);
   }
 
   console.log(notesContainer.dataset.isauth);
@@ -52,9 +59,6 @@ function addNotes(e) {
   // if (topic.value.length === 0) {
   //   return alert('Topic cannot be empty');
   // }
-  notes.push({topic: topic.value, description: textArea.value});
-  // localStorage.setItem('notes', JSON.stringify(notes));
-  buildNotes(notes);
 }
 
 function buildNotes(notes) {

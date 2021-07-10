@@ -313,8 +313,11 @@ img {
   gap: 20px;
 }
 
-.modal {
-  padding: 2rem;
+.modal img {
+  width: 20px;
+  margin-left: auto;
+  margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 form input,
@@ -1181,7 +1184,7 @@ kbd {
 }
 .task input[type=checkbox] {
   display: block;
-  margin: 13px 0 auto;
+  margin: 8px 0 auto;
   width: min-content;
 }
 .task__content > * + * {

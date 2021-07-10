@@ -5,7 +5,7 @@
     <header class="container"><%- include('./partials/nav.ejs') %></header>
     <main class="container">
       <h1>Edit notes</h1>
-      <form action="/notes" method="POST">
+      <form action="/notes/edit/<%= note.id %> " method="POST">
         <input type="hidden" name="_method" value="PUT" />
         <input
           type="text"

@@ -111,10 +111,7 @@ function buildTasks(tasks) {
         <p class="desc" contenteditable="false">${task.description}</p>
         <p class="date" contenteditable="false">${task.date}</p>
       </div>
-      <div class="edit">
-        <p class="edit-icon">Edit</p>
-        <p class="save-icon">Save</p>
-      </div>
+
     </div>
   `;
   });

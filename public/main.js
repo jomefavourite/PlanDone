@@ -9,7 +9,6 @@ function selectAll(name) {
 const hamburger = select('.hamburger');
 const nav = select('.nav');
 const navLists = selectAll('.nav__list__item a');
-const features = document.querySelectorAll('.feature');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('change');
@@ -22,4 +21,3 @@ navLists.forEach(navList => {
     document.body.classList.remove('overflow');
   });
 });
-

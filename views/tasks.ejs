@@ -32,12 +32,13 @@
 
     <main class="container">
       <div class="modal">
-        <form>
+        <img src="/images/cross.svg" alt="close modal" class="closeModal" />
+        <form action="/tasks" method="POST">
           <div>
             <input type="text" name="topic" id="topic" placeholder="Topic" />
             <input type="date" name="date" id="date" />
             <textarea
-              name=""
+              name="description"
               id="textarea"
               cols="30"
               rows="10"
@@ -48,7 +49,24 @@
         </form>
       </div>
 
-      <section class="tasks__container"></section>
+      <section class="tasks__container">
+        <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
+        <div class="task" data-aos="fade-up">
+          <input type="checkbox" id="checkbox" />
+          <div class="task__content">
+            <h2 contenteditable="false"><%= task.topic %></h2>
+            <p class="desc" contenteditable="false"><%= task.description %></p>
+            <p class="date" contenteditable="false"><%= task.date %></p>
+          </div>
+        </div>
+        <% })} %>
+      </section>
+      <% if (tasks.length === 0) { %>
+      <div class="task__none">
+        <img src="images/tasks.svg" alt="Add task icon" />
+        <h3>There are no Tasks, Please add a task</h3>
+      </div>
+      <% } %>
 
       <div class="notFound">
         <img src="../images/404-1.svg" alt="Not Found" />

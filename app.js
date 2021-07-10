@@ -10,6 +10,7 @@ const {ensureAuth, ensureGuest} = require('./middleware/auth');
 require('./config/auth');
 
 const Note = require('./models/Notes');
+const Task = require('./models/Tasks');
 
 // Load Config
 dotenv.config({path: './.env'});
@@ -132,23 +133,39 @@ app.get('/notes/edit/:id', (req, res) => {
   });
 });
 
-app.put('/notes/edit/:id', (req, res) => {
-  let note = Note.findById(req.params.id);
-
-  note = Note.findOneAndUpdate({_id: req.params.id}, req.body, {
+app.put('/notes/edit/:id', ensureAuth, (req, res) => {
+  Note.findOneAndUpdate({_id: req.params.id}, req.body, {
     new: true,
     runValidators: true,
   }).then(() => res.redirect('/notes'));
 });
 
 app.get('/tasks', (req, res) => {
-  res.render('tasks', {
-    title: 'Create Tasks - PlanDone',
-    firstName: req.isAuthenticated() ? req.user.firstName : '',
-    displayName: req.isAuthenticated() ? req.user.displayName : '',
-    picture: req.isAuthenticated() ? req.user.image : '',
-    isAuth: req.isAuthenticated(),
-  });
+  Task.find()
+    .then(data => {
+      res.render('tasks', {
+        title: 'Create Tasks - PlanDone',
+        firstName: req.isAuthenticated() ? req.user.firstName : '',
+        displayName: req.isAuthenticated() ? req.user.displayName : '',
+        picture: req.isAuthenticated() ? req.user.image : '',
+        isAuth: req.isAuthenticated(),
+        tasks: req.isAuthenticated() ? data : '',
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
+app.post('/tasks', (req, res) => {
+  const task = new Task(req.body);
+
+  task
+    .save()
+    .then(() => {
+      res.redirect('/tasks');
+    })
+    .catch(err => console.error(err));
 });
 
 app.get('/gpa-forecaster', (req, res) => {

@@ -1,6 +1,14 @@
 .modal {
-  padding: 2rem;
+  // padding: 2rem;
+
+  img {
+    width: 20px;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
 }
+
 form input,
 textarea {
   display: block;
