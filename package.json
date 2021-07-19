@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"nodemon app.js\" \"sass public/scss:public/css --watch\"",
-    "build": "npm build",
-    "start": "npm start"
+    "build": "node app.js"
   },
   "keywords": [],
   "author": "",
