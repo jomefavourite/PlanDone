@@ -11,6 +11,7 @@ require('./config/auth');
 
 const Note = require('./models/Notes');
 const Task = require('./models/Tasks');
+const Link = require('./models/Links');
 
 // Load Config
 dotenv.config({path: './.env'});
@@ -168,6 +169,17 @@ app.post('/tasks', (req, res) => {
     .catch(err => console.error(err));
 });
 
+app.delete('/tasks/:id', (req, res) => {
+  const id = req.params.id;
+
+  Task.findByIdAndDelete(id)
+    .then(() => {
+      res.json({redirect: '/tasks'});
+      // res.redirect('/notes');
+    })
+    .catch(err => console.error(err));
+});
+
 app.get('/gpa-forecaster', (req, res) => {
   res.render('forecaster', {
     title: 'CGPA Forecaster',
@@ -179,13 +191,42 @@ app.get('/gpa-forecaster', (req, res) => {
 });
 
 app.get('/links', (req, res) => {
-  res.render('link', {
-    title: 'Create Links - PlanDone',
-    firstName: req.isAuthenticated() ? req.user.firstName : '',
-    displayName: req.isAuthenticated() ? req.user.displayName : '',
-    picture: req.isAuthenticated() ? req.user.image : '',
-    isAuth: req.isAuthenticated(),
-  });
+  Link.find()
+    .then(data => {
+      res.render('link', {
+        title: 'Create Links - PlanDone',
+        firstName: req.isAuthenticated() ? req.user.firstName : '',
+        displayName: req.isAuthenticated() ? req.user.displayName : '',
+        picture: req.isAuthenticated() ? req.user.image : '',
+        isAuth: req.isAuthenticated(),
+        tasks: req.isAuthenticated() ? data : '',
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
+app.post('/links', (req, res) => {
+  const link = new Link(req.body);
+
+  link
+    .save()
+    .then(() => {
+      res.redirect('/links');
+    })
+    .catch(err => console.error(err));
+});
+
+app.delete('/links/:id', (req, res) => {
+  const id = req.params.id;
+
+  Link.findByIdAndDelete(id)
+    .then(() => {
+      res.json({redirect: '/links'});
+      // res.redirect('/notes');
+    })
+    .catch(err => console.error(err));
 });
 
 // Auth with Google

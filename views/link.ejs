@@ -53,12 +53,51 @@
         </form>
       </div>
 
-      <section class="links__container"></section>
+      <!-- <section class="links__container"></section> -->
+
+      <section class="links__container" data-isAuth="<%= isAuth %>">
+        <% if (links.length > 0) { %> <% links.forEach(link => { %>
+        <div>
+          <a href="<%" ="link.url" %>
+            data-aos="fade-up">
+            <div class="link">
+              <img src="../images/www.svg" alt="world wide web" />
+              <h5><%= link.urlName %></h5>
+            </div>
+          </a>
+
+          <button class="note__delete">
+            <img
+              data_id="<%= link.id %>"
+              class="delete"
+              src="../images/delete_icon.svg"
+              alt="delete icon"
+            />
+          </button>
+        </div>
+        <% })} %>
+      </section>
+      <% if (link.length === 0) { %>
+      <div class="task__none">
+        <img src="images/task-no.svg" alt="Add task icon" />
+        <h3>There are no Tasks, Please add a task</h3>
+      </div>
+      <% } %>
+
       <div class="notFound">
         <img src="../images/404-1.svg" alt="Not Found" />
         <h2>No Notes Found</h2>
       </div>
     </main>
+
+    <!-- <button class="note__delete">
+      <img
+        data_id="<%= note.id %>"
+        class="delete"
+        src="../images/delete_icon.svg"
+        alt="delete icon"
+      />
+    </button> -->
 
     <!-- Footer -->
     <%- include('./partials/footer.ejs') %>

@@ -94,17 +94,10 @@
     <!-- Footer -->
     <%- include('./partials/footer.ejs') %>
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
     <script type="module" src="../scripts/notes.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
     <script>
-      function stringToHTML(str) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(str, 'text/html');
-        return doc.body;
-      }
-
       const deleteIcons = document.querySelectorAll('.note__delete img');
 
       deleteIcons.forEach(deleteIcon => {

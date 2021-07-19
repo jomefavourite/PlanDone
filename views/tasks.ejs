@@ -49,10 +49,10 @@
         </form>
       </div>
 
-      <section class="tasks__container">
+      <section class="tasks__container" data-isAuth="<%= isAuth %>">
         <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
         <div class="task" data-aos="fade-up">
-          <input type="checkbox" id="checkbox" />
+          <input data_id="<%= task.id %>" type="checkbox" id="checkbox" />
           <div class="task__content">
             <h2 contenteditable="false"><%= task.topic %></h2>
             <p class="desc" contenteditable="false"><%= task.description %></p>
@@ -63,7 +63,7 @@
       </section>
       <% if (tasks.length === 0) { %>
       <div class="task__none">
-        <img src="images/tasks.svg" alt="Add task icon" />
+        <img src="images/task-no.svg" alt="Add task icon" />
         <h3>There are no Tasks, Please add a task</h3>
       </div>
       <% } %>
@@ -80,5 +80,25 @@
     <script type="module" src="../scripts/tasks.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
+
+    <script>
+      const deleteCheckBoxes = document.querySelectorAll(
+        'input[type="checkbox"]'
+      );
+
+      deleteCheckBoxes.forEach(checkbox => {
+        checkbox.addEventListener('click', e => {
+          const endpoint = `/tasks/${checkbox.attributes[0].nodeValue}`;
+
+          fetch(endpoint, {
+            method: 'DELETE',
+          })
+            .then(res => {
+              window.location.href = '/tasks';
+            })
+            .catch(err => console.error(err));
+        });
+      });
+    </script>
   </body>
 </html>

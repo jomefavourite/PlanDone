@@ -17,12 +17,6 @@ const closeModal = select('.closeModal');
 
 let notes = [];
 
-ClassicEditor.create(document.querySelector('#textarea')).catch(error => {
-  console.error(error);
-});
-
-console.log(select('.notes__container').dataset);
-
 // buildNotes(notes);
 
 btnAdd.addEventListener('click', addNotes);
@@ -49,16 +43,15 @@ function addNotes(e) {
     buildNotes(notes);
   }
 
-  console.log(notesContainer.dataset.isauth);
-  // if (topic.value.length === 0 && textArea.value.length === 0) {
-  //   return alert('Notes cannot be empty');
-  // }
-  // if (textArea.value.length === 0) {
-  //   return alert('Description cannot be empty');
-  // }
-  // if (topic.value.length === 0) {
-  //   return alert('Topic cannot be empty');
-  // }
+  if (topic.value.length === 0 && textArea.value.length === 0) {
+    return alert('Notes cannot be empty');
+  }
+  if (textArea.value.length === 0) {
+    return alert('Description cannot be empty');
+  }
+  if (topic.value.length === 0) {
+    return alert('Topic cannot be empty');
+  }
 }
 
 function buildNotes(notes) {

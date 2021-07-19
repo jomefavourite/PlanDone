@@ -24,13 +24,14 @@ const initialTasks = [
 
 let tasks = checkLocalStorage(initialTasks, 'tasks');
 
-buildTasks(tasks);
+// buildTasks(tasks);
 
 btnAdd.addEventListener('click', addTasks);
 search.addEventListener('keyup', e => filterNotes(e));
 createTasksBtn.addEventListener('click', () => {
   modal.classList.toggle('show');
 });
+
 const editIcon = select('.edit-icon');
 document.addEventListener('click', e => {
   if (e.target.classList.value === 'times' || e.target.id === 'checkbox') {
@@ -76,7 +77,16 @@ document.addEventListener('click', e => {
 // });
 
 function addTasks(e) {
-  e.preventDefault();
+  // e.preventDefault();
+
+  const tasksContainer = select('.tasks__container');
+
+  if (tasksContainer.dataset.isauth === 'false') {
+    e.preventDefault();
+    notes.push({topic: topic.value, description: textArea.value});
+    // localStorage.setItem('notes', JSON.stringify(notes));
+    buildNotes(notes);
+  }
 
   if (topic.value.length === 0 && textArea.value.length === 0) {
     return alert('Tasks cannot be empty');
@@ -93,8 +103,8 @@ function addTasks(e) {
     description: textArea.value,
     date: date.value,
   });
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-  buildTasks(tasks);
+  // localStorage.setItem('tasks', JSON.stringify(tasks));
+  // buildTasks(tasks);
 }
 
 function buildTasks(tasks) {

@@ -9,6 +9,8 @@ function selectAll(name) {
 const hamburger = select('.hamburger');
 const nav = select('.nav');
 const navLists = selectAll('.nav__list__item a');
+const modal = select('.modal');
+const closeModal = select('.closeModal');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('change');
@@ -20,4 +22,8 @@ navLists.forEach(navList => {
   navList.addEventListener('click', () => {
     document.body.classList.remove('overflow');
   });
+});
+
+closeModal.addEventListener('click', () => {
+  modal.classList.toggle('show');
 });
