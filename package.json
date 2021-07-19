@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"nodemon app.js\" \"sass public/scss:public/css --watch\"",
-    "build": "npm build"
+    "dev": "concurrently \"nodemon app.js\" \"sass public/scss:public/css --watch\"",
+    "build": "npm build",
+    "start": "npm start"
   },
   "keywords": [],
   "author": "",
