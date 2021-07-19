@@ -4,7 +4,7 @@
   "engines": {
     "node": "14.x"
   },
-  "description": "",
+  "description": "PlanDone is made for Students who would like to learn smart, be productive and access everything they need while studying in one place.",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"nodemon app.js\" \"sass public/scss:public/css --watch\"",
