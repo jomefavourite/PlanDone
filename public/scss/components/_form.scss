@@ -29,3 +29,19 @@ form button {
 form * + * {
   margin-top: 1rem;
 }
+
+input[name='topic'] {
+  margin-bottom: 1rem;
+}
+
+.ck-editor {
+  margin-top: 1rem;
+}
+
+.ck-content {
+  min-height: 200px;
+}
+
+.ck-editor__main {
+  margin-top: 0;
+}

@@ -341,6 +341,22 @@ form * + * {
   margin-top: 1rem;
 }
 
+input[name=topic] {
+  margin-bottom: 1rem;
+}
+
+.ck-editor {
+  margin-top: 1rem;
+}
+
+.ck-content {
+  min-height: 200px;
+}
+
+.ck-editor__main {
+  margin-top: 0;
+}
+
 .header {
   height: 100vh;
 }
@@ -435,7 +451,6 @@ form * + * {
   border-radius: 10px;
   padding: 1rem;
   min-height: 200px;
-  height: 200px;
   overflow: hidden;
   word-break: break-word;
   white-space: normal;
@@ -444,6 +459,7 @@ form * + * {
 .note h2 {
   font-size: 18px;
   margin-bottom: 1rem;
+  text-transform: capitalize;
 }
 .note p {
   font-size: 14px;
@@ -455,13 +471,6 @@ form * + * {
 .note:hover .note__edit,
 .note:hover .note__delete {
   opacity: 1;
-}
-.note__write {
-  display: flex;
-  justify-content: space-between;
-}
-.note__write * {
-  margin-top: 0 !important;
 }
 .note__edit, .note__delete {
   position: absolute;
@@ -493,6 +502,20 @@ form * + * {
 }
 .note input:checked + span {
   text-decoration: line-through;
+}
+.note > div h1 {
+  font-size: 17px;
+}
+.note > div h2 {
+  font-size: 16px;
+  text-transform: unset;
+  margin-bottom: 0;
+}
+.note > div h3 {
+  font-size: 15px;
+}
+.note > div ul {
+  margin: 10px 0 10px 20px;
 }
 
 .notes__container {

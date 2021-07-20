@@ -61,8 +61,7 @@
         <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
         <div class="note" data-aos="fade-up">
           <h2><%= note.topic %></h2>
-          <div><%= note.description %></div>
-
+          <div><%- note.description %></div>
           <a href="/notes/edit/<%= note.id %>" class="note__edit">
             <img src="./images/edit.svg" alt="edit icon" />
           </a>
@@ -93,11 +92,44 @@
 
     <!-- Footer -->
     <%- include('./partials/footer.ejs') %>
-
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
     <script type="module" src="../scripts/notes.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
     <script>
+      var macy = Macy({
+        container: '.notes__container',
+        trueOrder: false,
+        waitForImages: false,
+        margin: 15,
+        mobileFirst: true,
+        columns: 1,
+        breakAt: {
+          1200: 3,
+          940: 3,
+          520: 2,
+          400: 1,
+        },
+      });
+
+      ClassicEditor.create(document.querySelector('#textarea'), {
+        toolbar: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          'link',
+          'bulletedList',
+          'numberedList',
+          'blockQuote',
+          'undo',
+          'redo',
+        ],
+      }).catch(error => {
+        console.error(error);
+      });
+
       const deleteIcons = document.querySelectorAll('.note__delete img');
 
       deleteIcons.forEach(deleteIcon => {

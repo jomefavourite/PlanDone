@@ -6,7 +6,7 @@
   border-radius: 10px;
   padding: 1rem;
   min-height: 200px;
-  height: 200px;
+  // height: 200px;
   overflow: hidden;
   word-break: break-word;
   white-space: normal;
@@ -15,6 +15,7 @@
   h2 {
     font-size: 18px;
     margin-bottom: 1rem;
+    text-transform: capitalize;
   }
   p {
     font-size: 14px;
@@ -27,15 +28,6 @@
     .note__edit,
     .note__delete {
       opacity: 1;
-    }
-  }
-
-  &__write {
-    display: flex;
-    justify-content: space-between;
-
-    * {
-      margin-top: 0 !important;
     }
   }
 
@@ -75,6 +67,24 @@
 
   input:checked + span {
     text-decoration: line-through;
+  }
+
+  > div {
+    h1 {
+      font-size: 17px;
+    }
+    h2 {
+      font-size: 16px;
+      text-transform: unset;
+      margin-bottom: 0;
+    }
+    h3 {
+      font-size: 15px;
+    }
+
+    ul {
+      margin: 10px 0 10px 20px;
+    }
   }
 }
 
