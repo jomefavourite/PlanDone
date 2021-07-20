@@ -57,7 +57,7 @@
         </form>
       </div>
 
-      <section class="notes__container" data-isAuth="<%= isAuth %>">
+      <section class="notes__container" <% if (notes.length === 0) { %> notes__hidden <%} else {%> notes__show <%}%> data-isAuth="<%= isAuth %>">
         <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
         <div class="note" data-aos="fade-up">
           <h2><%= note.topic %></h2>
@@ -84,7 +84,7 @@
       </div>
       <% } %>
 
-      <div class="notFound">
+      <div class="<% if (notes.length === 0) { %> notFoundNone <%} else {%> notFound <%}%>">
         <img src="../images/404-1.svg" alt="Not Found" />
         <h2>No Notes Found</h2>
       </div>

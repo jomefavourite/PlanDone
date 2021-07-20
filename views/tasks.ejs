@@ -49,7 +49,7 @@
         </form>
       </div>
 
-      <section class="tasks__container" data-isAuth="<%= isAuth %>">
+      <section class="tasks__container <% if (tasks.length === 0) { %> tasks__hidden <%} else {%> tasks__show <%}%>" data-isAuth="<%= isAuth %>">
         <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
         <div class="task" data-aos="fade-up">
           <input data_id="<%= task.id %>" type="checkbox" id="checkbox" />
@@ -68,7 +68,7 @@
       </div>
       <% } %>
 
-      <div class="notFound">
+      <div class="<% if (tasks.length === 0) { %> notFoundNone <%} else {%> notFound <%}%>">
         <img src="../images/404-1.svg" alt="Not Found" />
         <h2>No Task Found</h2>
       </div>

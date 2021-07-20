@@ -120,7 +120,7 @@ img {
   border-radius: 10px;
   width: 40px;
   padding-left: 25px;
-  color: transparent;
+  color: #000;
   cursor: pointer;
   transition: width 500ms ease-in;
 }
@@ -214,6 +214,39 @@ img {
     width: 0;
   }
 }
+.note__none,
+.task__none,
+.link__none {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.note__none img,
+.task__none img,
+.link__none img {
+  display: block;
+  max-width: 300px;
+  margin: auto;
+}
+
+.tasks__hidden,
+.notes__hidden,
+.links__hidden {
+  display: none !important;
+}
+
+.tasks__show,
+.notes__show,
+.links__show {
+  display: grid !important;
+}
+
+.notFoundNone {
+  display: none;
+}
+
 .overflow {
   overflow-y: hidden;
 }
@@ -456,10 +489,13 @@ input[name=topic] {
   white-space: normal;
   transition: opacity 200ms ease-in;
 }
-.note h2 {
-  font-size: 18px;
+.note > h2 {
+  font-size: 20px;
   margin-bottom: 1rem;
   text-transform: capitalize;
+  text-decoration: underline;
+  text-decoration-skip: 20px;
+  text-underline-offset: 5px;
 }
 .note p {
   font-size: 14px;
@@ -488,34 +524,38 @@ input[name=topic] {
   border: none;
   cursor: pointer;
 }
-.note__none {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  margin-bottom: 5rem;
-}
-.note__none img {
-  display: block;
-  max-width: 300px;
-  margin: auto;
-}
 .note input:checked + span {
   text-decoration: line-through;
 }
 .note > div h1 {
-  font-size: 17px;
+  font-size: 18px;
+  margin: 3px 0;
 }
 .note > div h2 {
   font-size: 16px;
-  text-transform: unset;
-  margin-bottom: 0;
+  margin: 3px 0;
 }
 .note > div h3 {
   font-size: 15px;
+  margin: 3px 0;
 }
 .note > div ul {
   margin: 10px 0 10px 20px;
+}
+.note > div blockquote {
+  position: relative;
+  margin: 10px 0;
+}
+.note > div blockquote p {
+  margin-left: 5px;
+  font-style: italic;
+}
+.note > div blockquote::before {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 100%;
+  background: #fff;
 }
 
 .notes__container {
@@ -1194,13 +1234,15 @@ kbd {
 .tasks__container {
   display: grid;
   margin-bottom: 3rem;
+  min-height: 600px;
 }
 
 .task {
   display: flex;
   gap: 10px;
   padding: 0 20px 20px;
-  box-shadow: 0px 5px 8px rgba(128, 128, 128, 0.158);
+  box-shadow: 0px 5px 8px rgba(92, 19, 19, 0.158);
+  height: fit-content;
 }
 .task + .task {
   margin-top: 1rem;
@@ -1220,9 +1262,6 @@ kbd {
 }
 .task__content p {
   font-size: 16px;
-}
-.task__content [contenteditable=true] {
-  border: 2px solid black;
 }
 .task .edit {
   align-self: center;

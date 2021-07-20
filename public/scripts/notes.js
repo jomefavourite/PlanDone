@@ -90,6 +90,7 @@ function buildNotes(notes) {
 function filterNotes(e) {
   const notes = selectAll('.note');
   const notFound = select('.notFound');
+  const notesContainer = select('.notes__container');
 
   const searching = e.target.value.toLowerCase();
 

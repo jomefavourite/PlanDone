@@ -170,7 +170,7 @@ img {
       border-radius: 10px;
       width: 40px;
       padding-left: 25px;
-      color: transparent;
+      color: #000;
       cursor: pointer;
       transition: width 500ms ease-in;
     }
@@ -274,4 +274,35 @@ img {
     // transform: scaleX(0);
     width: 0;
   }
+}
+
+.note__none,
+.task__none,
+.link__none {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 5rem;
+
+  img {
+    display: block;
+    max-width: 300px;
+    margin: auto;
+  }
+}
+
+.tasks__hidden,
+.notes__hidden,
+.links__hidden {
+  display: none !important;
+}
+.tasks__show,
+.notes__show,
+.links__show {
+  display: grid !important;
+}
+
+.notFoundNone {
+  display: none;
 }

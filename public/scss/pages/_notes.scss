@@ -12,10 +12,13 @@
   white-space: normal;
   transition: opacity 200ms ease-in;
 
-  h2 {
-    font-size: 18px;
+  > h2 {
+    font-size: 20px;
     margin-bottom: 1rem;
     text-transform: capitalize;
+    text-decoration: underline;
+    text-decoration-skip: 20px;
+    text-underline-offset: 5px;
   }
   p {
     font-size: 14px;
@@ -51,39 +54,44 @@
     cursor: pointer;
   }
 
-  &__none {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 5rem;
-
-    img {
-      display: block;
-      max-width: 300px;
-      margin: auto;
-    }
-  }
-
   input:checked + span {
     text-decoration: line-through;
   }
 
   > div {
     h1 {
-      font-size: 17px;
+      font-size: 18px;
+      margin: 3px 0;
     }
     h2 {
       font-size: 16px;
-      text-transform: unset;
-      margin-bottom: 0;
+      margin: 3px 0;
     }
     h3 {
       font-size: 15px;
+      margin: 3px 0;
     }
 
     ul {
       margin: 10px 0 10px 20px;
+    }
+
+    blockquote {
+      position: relative;
+      margin: 10px 0;
+
+      p {
+        margin-left: 5px;
+        font-style: italic;
+      }
+    }
+
+    blockquote::before {
+      position: absolute;
+      content: '';
+      width: 2px;
+      height: 100%;
+      background: #fff;
     }
   }
 }

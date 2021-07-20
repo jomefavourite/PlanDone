@@ -199,7 +199,7 @@ app.get('/links', (req, res) => {
         displayName: req.isAuthenticated() ? req.user.displayName : '',
         picture: req.isAuthenticated() ? req.user.image : '',
         isAuth: req.isAuthenticated(),
-        tasks: req.isAuthenticated() ? data : '',
+        links: req.isAuthenticated() ? data : '',
       });
     })
     .catch(err => {
