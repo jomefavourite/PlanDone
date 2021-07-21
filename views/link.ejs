@@ -33,7 +33,7 @@
     <main class="container linker">
       <div class="modal">
         <img src="/images/cross.svg" alt="close modal" class="closeModal" />
-        <form>
+        <form action="/links" method="POST">
           <input
             type="text"
             name="url"
@@ -57,11 +57,11 @@
 
       <section class="links__container" data-isAuth="<%= isAuth %>">
         <% if (links.length > 0) { %> <% links.forEach(link => { %>
-        <div>
-          <a href="<%= link.url %>" data-aos="fade-up">
-            <div class="link">
+        <div class="link">
+          <a href="<%= link.urlName %>" data-aos="fade-up">
+            <div>
               <img src="../images/www.svg" alt="world wide web" />
-              <h5><%= link.urlName %></h5>
+              <h5><%= link.url %></h5>
             </div>
           </a>
 

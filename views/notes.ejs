@@ -43,21 +43,24 @@
       <div class="modal" aria-hidden="true">
         <img src="/images/cross.svg" alt="close modal" class="closeModal" />
         <form action="/notes" method="POST">
-          <input type="text" name="topic" id="topic" placeholder="Topic" />
+          <input type="text" name="topic" id="topic" placeholder="Topic" required />
 
           <textarea
             name="description"
-            id="textarea"
+            id="<% if (isAuth) {%>textarea<% } else {%>textbox<%} %>"
             cols="30"
             rows="10"
             placeholder="//Write a note here"
+            required
           ></textarea>
 
           <button class="button button__add" id="addNote">Add note</button>
         </form>
       </div>
 
-      <section class="notes__container" <% if (notes.length === 0) { %> notes__hidden <%} else {%> notes__show <%}%> data-isAuth="<%= isAuth %>">
+      <!-- // <% if (notes.length === 0) { %> notes__hidden <%} else {%> notes__show <%} %> ---->
+
+      <section class="notes__container" data-isAuth="<%= isAuth %>">
         <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
         <div class="note" data-aos="fade-up">
           <h2><%= note.topic %></h2>
@@ -84,7 +87,7 @@
       </div>
       <% } %>
 
-      <div class="<% if (notes.length === 0) { %> notFoundNone <%} else {%> notFound <%}%>">
+      <div class="<% if (notes.length === 0) { %>notFoundNone<%} else {%> notFound <%}%>">
         <img src="../images/404-1.svg" alt="Not Found" />
         <h2>No Notes Found</h2>
       </div>
@@ -97,8 +100,8 @@
     <script type="module" src="../scripts/notes.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
-    <script>
-      var macy = Macy({
+    <script> 
+      const macy = Macy({
         container: '.notes__container',
         trueOrder: false,
         waitForImages: false,
@@ -111,39 +114,6 @@
           520: 2,
           400: 1,
         },
-      });
-
-      ClassicEditor.create(document.querySelector('#textarea'), {
-        toolbar: [
-          'heading',
-          '|',
-          'bold',
-          'italic',
-          'link',
-          'bulletedList',
-          'numberedList',
-          'blockQuote',
-          'undo',
-          'redo',
-        ],
-      }).catch(error => {
-        console.error(error);
-      });
-
-      const deleteIcons = document.querySelectorAll('.note__delete img');
-
-      deleteIcons.forEach(deleteIcon => {
-        deleteIcon.addEventListener('click', e => {
-          const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
-
-          fetch(endpoint, {
-            method: 'DELETE',
-          })
-            .then(res => {
-              window.location.href = '/notes';
-            })
-            .catch(err => console.error(err));
-        });
       });
     </script>
   </body>

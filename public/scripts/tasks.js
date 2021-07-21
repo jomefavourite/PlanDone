@@ -8,6 +8,7 @@ const search = select('.search');
 const modal = select('.modal');
 const checkboxes = selectAll('#checkbox');
 const btnAdd = select('#addTasks');
+const deleteCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
 
 const initialTasks = [
   {
@@ -31,29 +32,41 @@ search.addEventListener('keyup', e => filterNotes(e));
 createTasksBtn.addEventListener('click', () => {
   modal.classList.toggle('show');
 });
+deleteCheckBoxes.forEach(checkbox => {
+  checkbox.addEventListener('click', e => {
+    const endpoint = `/tasks/${checkbox.attributes[0].nodeValue}`;
 
-const editIcon = select('.edit-icon');
-document.addEventListener('click', e => {
-  if (e.target.classList.value === 'times' || e.target.id === 'checkbox') {
-    return removeTasks(e.target);
-  }
-
-  // if (e.target.innerHTML === 'Edit') {
-  //   const editableText = select('p[contenteditable="false"]');
-  //   const saveIcon = select('.save-icon');
-
-  //   console.log(e.target);
-
-  //   editableText.setAttribute('contenteditable', 'true');
-  //   editableText.addEventListener('keyup', e => {
-  //     tasks[0].description = e.target.innerText;
-  //   });
-
-  //   saveIcon.addEventListener('click', () => {
-  //     localStorage.setItem('tasks', JSON.stringify(tasks));
-  //   });
-  // }
+    fetch(endpoint, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        window.location.href = '/tasks';
+      })
+      .catch(err => console.error(err));
+  });
 });
+
+// document.addEventListener('click', e => {
+//   if (e.target.classList.value === 'times' || e.target.id === 'checkbox') {
+//     return removeTasks(e.target);
+//   }
+
+// if (e.target.innerHTML === 'Edit') {
+//   const editableText = select('p[contenteditable="false"]');
+//   const saveIcon = select('.save-icon');
+
+//   console.log(e.target);
+
+//   editableText.setAttribute('contenteditable', 'true');
+//   editableText.addEventListener('keyup', e => {
+//     tasks[0].description = e.target.innerText;
+//   });
+
+//   saveIcon.addEventListener('click', () => {
+//     localStorage.setItem('tasks', JSON.stringify(tasks));
+//   });
+// }
+// });
 
 // const tasksContainer = selectAll('.task');
 

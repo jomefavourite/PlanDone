@@ -59,6 +59,10 @@ img {
   display: block;
 }
 
+main {
+  min-height: 100vh;
+}
+
 .container {
   width: 90%;
   max-width: 1200px;
@@ -1234,7 +1238,6 @@ kbd {
 .tasks__container {
   display: grid;
   margin-bottom: 3rem;
-  min-height: 600px;
 }
 
 .task {
@@ -1259,9 +1262,24 @@ kbd {
   font-size: unset;
   font-size: 18px;
   font-weight: normal;
+  text-transform: capitalize;
 }
 .task__content p {
   font-size: 16px;
+  color: rgba(0, 0, 0, 0.698);
+}
+.task__content p + p {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  border: 1px solid #000000b2;
+  border-radius: 4px;
+  padding: 3px;
+  max-width: 110px;
+}
+.task__content p + p img {
+  width: 20px;
+  margin-right: 5px;
 }
 .task .edit {
   align-self: center;
@@ -1279,8 +1297,11 @@ kbd {
 
 .link {
   border: 1px solid rgba(0, 0, 0, 0.198);
-  padding: 2rem;
   text-align: center;
+  position: relative;
+}
+.link a {
+  padding: 2rem;
 }
 .link img {
   display: block;
@@ -1289,6 +1310,20 @@ kbd {
 }
 .link h5 {
   color: #000;
+  text-transform: capitalize;
+}
+.link__delete {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: #000;
+  border: none;
+  cursor: pointer;
+}
+.link__delete img {
+  padding: 5px;
+  width: 100%;
+  max-width: 30px;
 }
 
 .contact {

@@ -2,11 +2,13 @@ import {select, selectAll} from '../util/init.js';
 
 const topic = select('#topic');
 const textArea = select('#textarea');
+const textBox = select('#textbox');
 const btnAdd = select('.button__add');
 const search = select('.search');
 const createNotesBtn = select('.createNotes');
 const modal = select('.modal');
 const closeModal = select('.closeModal');
+const notesContainer = select('.notes__container');
 
 // let initialNotes = [
 //   {topic: 'Demo', description: 'Hello everyone'},
@@ -34,35 +36,34 @@ closeModal.addEventListener('click', () => {
 // });
 
 function addNotes(e) {
-  const notesContainer = select('.notes__container');
-
   if (notesContainer.dataset.isauth === 'false') {
     e.preventDefault();
-    notes.push({topic: topic.value, description: textArea.value});
+    notes.push({topic: topic.value, description: textBox.value});
     // localStorage.setItem('notes', JSON.stringify(notes));
     buildNotes(notes);
   }
 
-  if (topic.value.length === 0 && textArea.value.length === 0) {
-    return alert('Notes cannot be empty');
-  }
-  if (textArea.value.length === 0) {
-    return alert('Description cannot be empty');
-  }
-  if (topic.value.length === 0) {
-    return alert('Topic cannot be empty');
-  }
+  // if (topic.value.length === 0 && textArea.value.length === 0) {
+  //   return alert('Notes cannot be empty');
+  // }
+  // if (textArea.value.length === 0) {
+  //   return alert('Description cannot be empty');
+  // }
+  // if (topic.value.length === 0) {
+  //   return alert('Topic cannot be empty');
+  // }
+
+  // console.log(notesContainer.dataset.isauth);
 }
 
 function buildNotes(notes) {
-  const notesContainer = select('.notes__container');
-
-  console.log(notesContainer.dataset.isAuth);
   // notesContainer.innerHTML = '';
-  // setTimeout(() => {
-  //   topic.value = '';
-  //   textArea.value = '';
-  // }, 1000);
+  setTimeout(() => {
+    topic.value = '';
+    textBox.value = '';
+  }, 1000);
+
+  modal.classList.toggle('show');
   // style="background-color: ${clr || color.value}"
   notes.forEach(note => {
     notesContainer.innerHTML += `
@@ -76,6 +77,8 @@ function buildNotes(notes) {
     </div>
   `;
   });
+
+  console.log(notes);
 }
 
 // function removeNote(e) {
@@ -90,7 +93,6 @@ function buildNotes(notes) {
 function filterNotes(e) {
   const notes = selectAll('.note');
   const notFound = select('.notFound');
-  const notesContainer = select('.notes__container');
 
   const searching = e.target.value.toLowerCase();
 
@@ -112,3 +114,36 @@ function filterNotes(e) {
     ? (notFound.style.display = 'block')
     : (notFound.style.display = 'none');
 }
+
+ClassicEditor.create(textArea ? textArea : '', {
+  toolbar: [
+    'heading',
+    '|',
+    'bold',
+    'italic',
+    'link',
+    'bulletedList',
+    'numberedList',
+    'blockQuote',
+    'undo',
+    'redo',
+  ],
+}).catch(error => {
+  console.error(error);
+});
+
+const deleteIcons = document.querySelectorAll('.note__delete img');
+
+deleteIcons.forEach(deleteIcon => {
+  deleteIcon.addEventListener('click', e => {
+    const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
+
+    fetch(endpoint, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        window.location.href = '/notes';
+      })
+      .catch(err => console.error(err));
+  });
+});

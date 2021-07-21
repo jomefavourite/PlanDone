@@ -1,7 +1,6 @@
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
-const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');

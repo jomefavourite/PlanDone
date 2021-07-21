@@ -7,18 +7,18 @@ const modal = select('.modal');
 const title = select('.title');
 const btnAdd = select('#addLink');
 
-const initialLinks = [
-  {
-    title: 'RUN LMS',
-    urlname: 'https://run.nhuniversities.com.ng/login/index.php',
-  },
-  {
-    title: 'Student Portal',
-    urlname: 'http://reg.run.edu.ng/index.php',
-  },
-];
+// const initialLinks = [
+//   {
+//     title: 'RUN LMS',
+//     urlname: 'https://run.nhuniversities.com.ng/login/index.php',
+//   },
+//   {
+//     title: 'Student Portal',
+//     urlname: 'http://reg.run.edu.ng/index.php',
+//   },
+// ];
 
-let links = checkLocalStorage(initialLinks, 'links');
+let links = [];
 
 btnAdd.addEventListener('click', addLinks);
 search.addEventListener('keyup', e => filterLinks(e));
@@ -26,7 +26,7 @@ createLinkBtn.addEventListener('click', () => {
   modal.classList.toggle('show');
 });
 
-buildLinks(links);
+// buildLinks(links);
 
 function buildLinks(links) {
   const linksContainer = select('.links__container');
@@ -46,7 +46,7 @@ function buildLinks(links) {
 }
 
 function addLinks(e) {
-  e.preventDefault();
+  const linksContainer = select('.links__container');
 
   if (title.value.length === 0 && urlName.value.length === 0) {
     return alert('Inputs cannot be empty');
@@ -58,12 +58,18 @@ function addLinks(e) {
     return alert('The URL name cannot be empty');
   }
 
-  links.push({
-    title: title.value,
-    urlname: urlName.value,
-  });
-  localStorage.setItem('links', JSON.stringify(links));
-  buildLinks(links);
+  if (linksContainer.dataset.isauth === 'false') {
+    e.preventDefault();
+    links.push({title: title.value, urlname: urlName.value});
+    buildLinks(links);
+  }
+
+  // links.push({
+  //   title: title.value,
+  //   urlname: urlName.value,
+  // });
+  // localStorage.setItem('links', JSON.stringify(links));
+  // buildLinks(links);
 }
 
 function filterLinks(e) {
@@ -91,3 +97,19 @@ function filterLinks(e) {
     ? (notFound.style.display = 'block')
     : (notFound.style.display = 'none');
 }
+
+const deleteIcons = document.querySelectorAll('.link__delete img');
+
+deleteIcons.forEach(deleteIcon => {
+  deleteIcon.addEventListener('click', e => {
+    const endpoint = `/links/${deleteIcon.attributes[0].nodeValue}`;
+
+    fetch(endpoint, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        window.location.href = '/links';
+      })
+      .catch(err => console.error(err));
+  });
+});

@@ -52,11 +52,14 @@
       <section class="tasks__container <% if (tasks.length === 0) { %> tasks__hidden <%} else {%> tasks__show <%}%>" data-isAuth="<%= isAuth %>">
         <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
         <div class="task" data-aos="fade-up">
-          <input data_id="<%= task.id %>" type="checkbox" id="checkbox" />
+          <input data_id="<%= task.id %>" type="checkbox" id="checkbox" title="mark completed" />
           <div class="task__content">
-            <h2 contenteditable="false"><%= task.topic %></h2>
-            <p class="desc" contenteditable="false"><%= task.description %></p>
-            <p class="date" contenteditable="false"><%= task.date %></p>
+            <h2><%= task.topic %></h2>
+            <p class="desc"><%= task.description %></p>
+            <p class="date">
+              <img src="./images/calender.svg" alt="">
+              <%= task.date %>
+            </p>
           </div>
         </div>
         <% })} %>
@@ -80,25 +83,5 @@
     <script type="module" src="../scripts/tasks.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
-
-    <script>
-      const deleteCheckBoxes = document.querySelectorAll(
-        'input[type="checkbox"]'
-      );
-
-      deleteCheckBoxes.forEach(checkbox => {
-        checkbox.addEventListener('click', e => {
-          const endpoint = `/tasks/${checkbox.attributes[0].nodeValue}`;
-
-          fetch(endpoint, {
-            method: 'DELETE',
-          })
-            .then(res => {
-              window.location.href = '/tasks';
-            })
-            .catch(err => console.error(err));
-        });
-      });
-    </script>
   </body>
 </html>
