@@ -28,6 +28,7 @@ createLinkBtn.addEventListener('click', () => {
 
 // buildLinks(links);
 
+
 function buildLinks(links) {
   const linksContainer = select('.links__container');
   linksContainer.innerHTML = '';
@@ -113,3 +114,4 @@ deleteIcons.forEach(deleteIcon => {
       .catch(err => console.error(err));
   });
 });
+

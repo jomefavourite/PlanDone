@@ -1,4 +1,8 @@
-import {select, selectAll, checkLocalStorage} from '../util/init.js';
+import {
+  select,
+  selectAll,
+  checkLocalStorage
+} from '../util/init.js';
 
 const topic = select('#topic');
 const textArea = select('#textarea');
@@ -9,21 +13,23 @@ const modal = select('.modal');
 const checkboxes = selectAll('#checkbox');
 const btnAdd = select('#addTasks');
 const deleteCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
+const tasksContainer = select('.tasks__container');
 
-const initialTasks = [
-  {
-    topic: 'Submit my assignment before Monday',
-    description: 'Lorem ipsum dolor sit amet.',
-    date: '1/05/21',
-  },
-  {
-    topic: 'Loading',
-    description: 'Lorem ipsum dolor sit amet.',
-    date: '1/05/21',
-  },
-];
+// const initialTasks = [
+//   {
+//     topic: 'Submit my assignment before Monday',
+//     description: 'Lorem ipsum dolor sit amet.',
+//     date: '1/05/21',
+//   },
+//   {
+//     topic: 'Loading',
+//     description: 'Lorem ipsum dolor sit amet.',
+//     date: '1/05/21',
+//   },
+// ];
 
-let tasks = checkLocalStorage(initialTasks, 'tasks');
+// let tasks = checkLocalStorage(initialTasks, 'tasks');
+let tasks = [];
 
 // buildTasks(tasks);
 
@@ -92,39 +98,49 @@ deleteCheckBoxes.forEach(checkbox => {
 function addTasks(e) {
   // e.preventDefault();
 
-  const tasksContainer = select('.tasks__container');
+  // const tasksContainer = select('.tasks__container');
 
   if (tasksContainer.dataset.isauth === 'false') {
     e.preventDefault();
-    notes.push({topic: topic.value, description: textArea.value});
+    tasks.push({
+      topic: topic.value,
+      description: textArea.value,
+      date: date.value,
+    });
     // localStorage.setItem('notes', JSON.stringify(notes));
-    buildNotes(notes);
+    buildTasks(tasks);
   }
 
-  if (topic.value.length === 0 && textArea.value.length === 0) {
-    return alert('Tasks cannot be empty');
-  }
-  if (textArea.value.length === 0) {
-    return alert('Description cannot be empty');
-  }
-  if (topic.value.length === 0) {
-    return alert('Topic cannot be empty');
-  }
+  // if (topic.value.length === 0 && textArea.value.length === 0) {
+  //   return alert('Tasks cannot be empty');
+  // }
+  // if (textArea.value.length === 0) {
+  //   return alert('Description cannot be empty');
+  // }
+  // if (topic.value.length === 0) {
+  //   return alert('Topic cannot be empty');
+  // }
 
-  tasks.push({
-    topic: topic.value,
-    description: textArea.value,
-    date: date.value,
-  });
+  // tasks.push({
+  //   topic: topic.value,
+  //   description: textArea.value,
+  //   date: date.value,
+  // });
   // localStorage.setItem('tasks', JSON.stringify(tasks));
   // buildTasks(tasks);
 }
 
 function buildTasks(tasks) {
-  const tasksContainer = select('.tasks__container');
   tasksContainer.innerHTML = '';
-  topic.value = '';
-  textArea.value = '';
+  setTimeout(() => {
+    topic.value = '';
+    textArea.value = '';
+    date.value = '';
+  }, 1000);
+  // topic.value = '';
+  // textArea.value = '';
+  modal.classList.remove('show');
+
   tasks.forEach(task => {
     tasksContainer.innerHTML += `
     <div class="task" data-aos="fade-up">
@@ -134,10 +150,11 @@ function buildTasks(tasks) {
         <p class="desc" contenteditable="false">${task.description}</p>
         <p class="date" contenteditable="false">${task.date}</p>
       </div>
-
     </div>
   `;
   });
+
+  console.log(tasks);
 }
 
 function removeTasks(e) {

@@ -29,11 +29,11 @@ createNotesBtn.addEventListener('click', () => {
 closeModal.addEventListener('click', () => {
   modal.classList.toggle('show');
 });
-// document.addEventListener('click', e => {
-//   if (e.target.classList.value === 'delete') {
-//     return removeNote(e.target.parentElement);
-//   }
-// });
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('delete__off')) {
+    return removeNote(e.target.parentElement);
+  }
+});
 
 function addNotes(e) {
   if (notesContainer.dataset.isauth === 'false') {
@@ -57,13 +57,13 @@ function addNotes(e) {
 }
 
 function buildNotes(notes) {
-  // notesContainer.innerHTML = '';
+  notesContainer.innerHTML = '';
   setTimeout(() => {
     topic.value = '';
     textBox.value = '';
   }, 1000);
 
-  modal.classList.toggle('show');
+  modal.classList.remove('show');
   // style="background-color: ${clr || color.value}"
   notes.forEach(note => {
     notesContainer.innerHTML += `
@@ -72,23 +72,21 @@ function buildNotes(notes) {
       <pre>${note.description}</pre>
 
       <button class="note__delete">
-        <img class="delete" src="../images/delete_icon.svg" alt="delete icon" />
+        <img class="delete__off delete" src="../images/delete_icon.svg" alt="delete icon" />
       </button>
     </div>
   `;
   });
-
-  console.log(notes);
 }
 
-// function removeNote(e) {
-//   notes = notes.filter(note => {
-//     let topic = e.parentElement.querySelector('h2').textContent;
-//     return topic !== note.topic;
-//   });
-//   buildNotes(notes);
-//   localStorage.setItem('notes', JSON.stringify(notes));
-// }
+function removeNote(e) {
+  notes = notes.filter(note => {
+    let topic = e.parentElement.querySelector('h2').textContent;
+    return topic !== note.topic;
+  });
+  buildNotes(notes);
+  // localStorage.setItem('notes', JSON.stringify(notes));
+}
 
 function filterNotes(e) {
   const notes = selectAll('.note');

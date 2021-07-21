@@ -12,4 +12,5 @@ function checkLocalStorage(initialValue, check) {
   return localData ? JSON.parse(localStorage.getItem(check)) : initialValue;
 }
 
+
 export {select, selectAll, checkLocalStorage};
