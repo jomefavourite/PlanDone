@@ -1,3 +1,5 @@
+/** @format */
+
 function select(name) {
   return document.querySelector(name);
 }
@@ -6,24 +8,24 @@ function selectAll(name) {
   return document.querySelectorAll(name);
 }
 
-const hamburger = select('.hamburger');
-const nav = select('.nav');
-const navLists = selectAll('.nav__list__item a');
-const modal = select('.modal');
-const closeModal = select('.closeModal');
+const hamburger = select(".hamburger");
+const nav = select(".nav");
+const navLists = selectAll(".nav__list__item a");
+const modal = select(".modal");
+const closeModal = select(".closeModal");
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('change');
-  nav.classList.toggle('toggle-show');
-  document.body.classList.toggle('overflow');
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("change");
+  nav.classList.toggle("toggle-show");
+  document.body.classList.toggle("overflow");
 });
 
 navLists.forEach(navList => {
-  navList.addEventListener('click', () => {
-    document.body.classList.remove('overflow');
+  navList.addEventListener("click", () => {
+    document.body.classList.remove("overflow");
   });
 });
 
-closeModal.addEventListener('click', () => {
-  modal.classList.toggle('show');
+closeModal.addEventListener("click", () => {
+  modal.classList.remove("show");
 });

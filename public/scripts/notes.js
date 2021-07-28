@@ -1,14 +1,16 @@
-import {select, selectAll} from '../util/init.js';
+import {select, selectAll} from "../util/init.js";
 
-const topic = select('#topic');
-const textArea = select('#textarea');
-const textBox = select('#textbox');
-const btnAdd = select('.button__add');
-const search = select('.search');
-const createNotesBtn = select('.createNotes');
-const modal = select('.modal');
-const closeModal = select('.closeModal');
-const notesContainer = select('.notes__container');
+const topic = select("#topic");
+const textArea = select("#textarea");
+const textBox = select("#textbox");
+const btnAdd = select(".button__add");
+const search = select(".search");
+const createNotesBtn = select(".createNotes");
+const modal = select(".modal");
+const closeModal = select(".closeModal");
+const notesContainer = select(".notes__container");
+const noteOffline = select(".note__none__offline");
+const spinner = select(".spinner");
 
 // let initialNotes = [
 //   {topic: 'Demo', description: 'Hello everyone'},
@@ -21,22 +23,23 @@ let notes = [];
 
 // buildNotes(notes);
 
-btnAdd.addEventListener('click', addNotes);
-search.addEventListener('keyup', e => filterNotes(e));
-createNotesBtn.addEventListener('click', () => {
-  modal.classList.toggle('show');
+btnAdd.addEventListener("click", addNotes);
+search.addEventListener("keyup", e => filterNotes(e));
+createNotesBtn.addEventListener("click", () => {
+  modal.classList.toggle("show");
 });
-closeModal.addEventListener('click', () => {
-  modal.classList.toggle('show');
+closeModal.addEventListener("click", () => {
+  modal.classList.toggle("show");
 });
-document.addEventListener('click', e => {
-  if (e.target.classList.contains('delete__off')) {
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("delete__off")) {
     return removeNote(e.target.parentElement);
   }
 });
 
 function addNotes(e) {
-  if (notesContainer.dataset.isauth === 'false') {
+  spinner.style.display = "inline-block";
+  if (notesContainer.dataset.isauth === "false") {
     e.preventDefault();
     notes.push({topic: topic.value, description: textBox.value});
     // localStorage.setItem('notes', JSON.stringify(notes));
@@ -57,14 +60,16 @@ function addNotes(e) {
 }
 
 function buildNotes(notes) {
-  notesContainer.innerHTML = '';
+  notesContainer.innerHTML = "";
   setTimeout(() => {
-    topic.value = '';
-    textBox.value = '';
+    topic.value = "";
+    textBox.value = "";
   }, 1000);
 
-  modal.classList.remove('show');
+  modal.classList.remove("show");
   // style="background-color: ${clr || color.value}"
+  noteOffline.style.display = "none";
+
   notes.forEach(note => {
     notesContainer.innerHTML += `
     <div class="note" data-aos="fade-up">
@@ -81,7 +86,7 @@ function buildNotes(notes) {
 
 function removeNote(e) {
   notes = notes.filter(note => {
-    let topic = e.parentElement.querySelector('h2').textContent;
+    let topic = e.parentElement.querySelector("h2").textContent;
     return topic !== note.topic;
   });
   buildNotes(notes);
@@ -89,8 +94,8 @@ function removeNote(e) {
 }
 
 function filterNotes(e) {
-  const notes = selectAll('.note');
-  const notFound = select('.notFound');
+  const notes = selectAll(".note");
+  const notFound = select(".notFound");
 
   const searching = e.target.value.toLowerCase();
 
@@ -98,49 +103,49 @@ function filterNotes(e) {
   [...notes].forEach(note => {
     const noteContent = note.firstElementChild.innerText;
     if (noteContent.toLowerCase().includes(searching)) {
-      note.style.display = 'block';
+      note.style.display = "block";
     } else {
-      note.style.display = 'none';
+      note.style.display = "none";
     }
   });
 
   const result = [...notes].every(note => {
-    return note.style.display === 'none';
+    return note.style.display === "none";
   });
 
   result === true
-    ? (notFound.style.display = 'block')
-    : (notFound.style.display = 'none');
+    ? (notFound.style.display = "block")
+    : (notFound.style.display = "none");
 }
 
-ClassicEditor.create(textArea ? textArea : '', {
+ClassicEditor.create(textArea ? textArea : "", {
   toolbar: [
-    'heading',
-    '|',
-    'bold',
-    'italic',
-    'link',
-    'bulletedList',
-    'numberedList',
-    'blockQuote',
-    'undo',
-    'redo',
+    "heading",
+    "|",
+    "bold",
+    "italic",
+    "link",
+    "bulletedList",
+    "numberedList",
+    "blockQuote",
+    "undo",
+    "redo",
   ],
 }).catch(error => {
   console.error(error);
 });
 
-const deleteIcons = document.querySelectorAll('.note__delete img');
+const deleteIcons = document.querySelectorAll(".note__delete img");
 
 deleteIcons.forEach(deleteIcon => {
-  deleteIcon.addEventListener('click', e => {
+  deleteIcon.addEventListener("click", e => {
     const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
 
     fetch(endpoint, {
-      method: 'DELETE',
+      method: "DELETE",
     })
       .then(res => {
-        window.location.href = '/notes';
+        window.location.href = "/notes";
       })
       .catch(err => console.error(err));
   });

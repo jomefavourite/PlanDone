@@ -43,7 +43,13 @@
       <div class="modal" aria-hidden="true">
         <img src="/images/cross.svg" alt="close modal" class="closeModal" />
         <form action="/notes" method="POST">
-          <input type="text" name="topic" id="topic" placeholder="Topic" required />
+          <input
+            type="text"
+            name="topic"
+            id="topic"
+            placeholder="Topic"
+            required
+          />
 
           <textarea
             name="description"
@@ -51,14 +57,14 @@
             cols="30"
             rows="10"
             placeholder="//Write a note here"
-            required
           ></textarea>
 
-          <button class="button button__add" id="addNote">Add note</button>
+          <button type="submit" class="button button__add" id="addNote">
+            Add note
+            <div class="spinner icon-spinner-2" aria-hidden="true"></div>
+          </button>
         </form>
       </div>
-
-      <!-- // <% if (notes.length === 0) { %> notes__hidden <%} else {%> notes__show <%} %> ---->
 
       <section class="notes__container" data-isAuth="<%= isAuth %>">
         <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
@@ -80,14 +86,19 @@
         </div>
         <% })} %>
       </section>
-      <% if (notes.length === 0) { %>
+      <% if (isAuth && notes.length === 0) { %>
       <div class="note__none">
         <img src="images/note.svg" alt="Add note icon" />
-        <h3>There are no Notes, Please add a note</h3>
+        <h3>There are no Notes here, Please add a note</h3>
+      </div>
+      <% } %> <% if (isAuth === false) { %>
+      <div class="note__none note__none__offline">
+        <img src="images/note.svg" alt="Add note icon" />
+        <h3>There are no Notes here, Please add a note</h3>
       </div>
       <% } %>
 
-      <div class="<% if (notes.length === 0) { %>notFoundNone<%} else {%> notFound <%}%>">
+      <div class="<%if(notes.length===0){%>notFoundNone<%}else{%>notFound<%}%>">
         <img src="../images/404-1.svg" alt="Not Found" />
         <h2>No Notes Found</h2>
       </div>
@@ -100,9 +111,9 @@
     <script type="module" src="../scripts/notes.js"></script>
     <script type="module" src="../main.js"></script>
     <%- include('./partials/aos.ejs') %>
-    <script> 
+    <script>
       const macy = Macy({
-        container: '.notes__container',
+        container: ".notes__container",
         trueOrder: false,
         waitForImages: false,
         margin: 15,

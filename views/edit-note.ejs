@@ -32,7 +32,20 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
     <script type="module" src="../main.js"></script>
     <script>
-      ClassicEditor.create(document.querySelector('#textarea')).catch(error => {
+      ClassicEditor.create(document.querySelector('#textarea'), {
+        toolbar: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          'link',
+          'bulletedList',
+          'numberedList',
+          'blockQuote',
+          'undo',
+          'redo',
+        ],
+      }).catch(error => {
         console.error(error);
       });
     </script>

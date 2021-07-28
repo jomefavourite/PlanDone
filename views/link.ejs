@@ -76,27 +76,24 @@
         </div>
         <% })} %>
       </section>
-      <% if (links.length === 0) { %>
+      <% if (isAuth && links.length === 0) { %>
       <div class="task__none">
-        <img src="images/link-no.svg" alt="Add task icon" />
-        <h3>There are no Tasks, Please add a task</h3>
+        <img src="images/link-no.svg" alt="Add link icon" />
+        <h3>There are no Links here, Please add a link</h3>
+      </div>
+      <% } %>
+      <% if (isAuth === false) { %>
+      <div class="task__none task__none__offline">
+        <img src="images/link-no.svg" alt="Add link icon" />
+        <h3>There are no Links here, Please add a link</h3>
       </div>
       <% } %>
 
       <div class="notFound">
         <img src="../images/404-1.svg" alt="Not Found" />
-        <h2>No Notes Found</h2>
+        <h2>No Link Found</h2>
       </div>
     </main>
-
-    <!-- <button class="note__delete">
-      <img
-        data_id=""
-        class="delete"
-        src="../images/delete_icon.svg"
-        alt="delete icon"
-      />
-    </button> -->
 
     <!-- Footer -->
     <%- include('./partials/footer.ejs') %>

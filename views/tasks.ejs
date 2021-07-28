@@ -35,43 +35,60 @@
         <img src="/images/cross.svg" alt="close modal" class="closeModal" />
         <form action="/tasks" method="POST">
           <div>
-            <input type="text" name="topic" id="topic" placeholder="Topic" />
-            <input type="date" name="date" id="date" />
+            <input
+              type="text"
+              name="topic"
+              id="topic"
+              placeholder="Topic"
+              required
+            />
+            <input type="date" name="date" id="date" required />
             <textarea
               name="description"
               id="textarea"
               cols="30"
               rows="10"
               placeholder="input your tasks"
+              required
             ></textarea>
           </div>
-          <button id="addTasks" class="button">Add tasks</button>
+          <button type="submit" id="addTasks" class="button">Add tasks</button>
         </form>
       </div>
 
       <section class="tasks__container" data-isAuth="<%= isAuth %>">
         <% if (tasks.length > 0) { %> <% tasks.forEach(task => { %>
         <div class="task" data-aos="fade-up">
-          <input data_id="<%= task.id %>" type="checkbox" id="checkbox" title="mark completed" />
+          <input
+            data_id="<%= task.id %>"
+            type="checkbox"
+            id="checkbox"
+            title="mark completed"
+          />
           <div class="task__content">
             <h2><%= task.topic %></h2>
             <p class="desc"><%= task.description %></p>
             <p class="date">
-              <img src="./images/calender.svg" alt="">
+              <img src="./images/calender.svg" alt="" />
               <%= task.date %>
             </p>
           </div>
         </div>
         <% })} %>
       </section>
-      <% if (tasks.length === 0) { %>
+      <% if (isAuth && tasks.length === 0) { %>
       <div class="task__none">
         <img src="images/task-no.svg" alt="Add task icon" />
-        <h3>There are no Tasks, Please add a task</h3>
+        <h3>There are no Tasks here, Please add a task</h3>
+      </div>
+      <% } %> <% if (isAuth == false) { %>
+      <div class="task__none task__none__offline">
+        <img src="images/task-no.svg" alt="Add task icon" />
+        <h3>There are no Tasks here, Please add a task</h3>
       </div>
       <% } %>
 
-      <div class="<% if (tasks.length === 0) { %> notFoundNone <%} else {%> notFound <%}%>">
+      <div class="<%if(tasks.length===0){%>notFoundNone<%}else{%>notFound<%}%>">
         <img src="../images/404-1.svg" alt="Not Found" />
         <h2>No Task Found</h2>
       </div>

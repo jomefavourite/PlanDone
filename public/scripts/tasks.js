@@ -1,19 +1,16 @@
-import {
-  select,
-  selectAll,
-  checkLocalStorage
-} from '../util/init.js';
+import {select, selectAll, checkLocalStorage} from "../util/init.js";
 
-const topic = select('#topic');
-const textArea = select('#textarea');
-const date = select('#date');
-const createTasksBtn = select('.createNotes');
-const search = select('.search');
-const modal = select('.modal');
-const checkboxes = selectAll('#checkbox');
-const btnAdd = select('#addTasks');
+const topic = select("#topic");
+const textArea = select("#textarea");
+const date = select("#date");
+const createTasksBtn = select(".createNotes");
+const search = select(".search");
+const modal = select(".modal");
+const checkboxes = selectAll("#checkbox");
+const btnAdd = select("#addTasks");
 const deleteCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
-const tasksContainer = select('.tasks__container');
+const tasksContainer = select(".tasks__container");
+const taskOffline = select(".task__none__offline");
 
 // const initialTasks = [
 //   {
@@ -33,20 +30,20 @@ let tasks = [];
 
 // buildTasks(tasks);
 
-btnAdd.addEventListener('click', addTasks);
-search.addEventListener('keyup', e => filterNotes(e));
-createTasksBtn.addEventListener('click', () => {
-  modal.classList.toggle('show');
+btnAdd.addEventListener("click", addTasks);
+search.addEventListener("keyup", e => filterNotes(e));
+createTasksBtn.addEventListener("click", () => {
+  modal.classList.toggle("show");
 });
 deleteCheckBoxes.forEach(checkbox => {
-  checkbox.addEventListener('click', e => {
+  checkbox.addEventListener("click", e => {
     const endpoint = `/tasks/${checkbox.attributes[0].nodeValue}`;
 
     fetch(endpoint, {
-      method: 'DELETE',
+      method: "DELETE",
     })
       .then(res => {
-        window.location.href = '/tasks';
+        window.location.href = "/tasks";
       })
       .catch(err => console.error(err));
   });
@@ -100,7 +97,7 @@ function addTasks(e) {
 
   // const tasksContainer = select('.tasks__container');
 
-  if (tasksContainer.dataset.isauth === 'false') {
+  if (tasksContainer.dataset.isauth === "false") {
     e.preventDefault();
     tasks.push({
       topic: topic.value,
@@ -131,24 +128,28 @@ function addTasks(e) {
 }
 
 function buildTasks(tasks) {
-  tasksContainer.innerHTML = '';
+  tasksContainer.innerHTML = "";
   setTimeout(() => {
-    topic.value = '';
-    textArea.value = '';
-    date.value = '';
+    topic.value = "";
+    textArea.value = "";
+    date.value = "";
   }, 1000);
   // topic.value = '';
   // textArea.value = '';
-  modal.classList.remove('show');
+  modal.classList.remove("show");
+  taskOffline.style.display = "none";
 
   tasks.forEach(task => {
     tasksContainer.innerHTML += `
     <div class="task" data-aos="fade-up">
-      <input type="checkbox" id="checkbox" />
+      <input data_id="<%= task.id %>" type="checkbox" id="checkbox" title="mark completed" />
       <div class="task__content">
-        <h2 contenteditable="false">${task.topic}</h2>
-        <p class="desc" contenteditable="false">${task.description}</p>
-        <p class="date" contenteditable="false">${task.date}</p>
+        <h2>${task.topic}</h2>
+        <p class="desc">${task.description}</p>
+        <p class="date">
+          <img src="./images/calender.svg" alt="">
+          ${task.date}
+        </p>
       </div>
     </div>
   `;
@@ -159,7 +160,7 @@ function buildTasks(tasks) {
 
 function removeTasks(e) {
   tasks = tasks.filter(task => {
-    let topic = e.parentElement.querySelector('h2').textContent;
+    let topic = e.parentElement.querySelector("h2").textContent;
 
     console.log(topic);
     // return topic !== task.topic;
@@ -170,8 +171,8 @@ function removeTasks(e) {
 }
 
 function filterNotes(e) {
-  const tasks = selectAll('.task');
-  const notFound = select('.notFound');
+  const tasks = selectAll(".task");
+  const notFound = select(".notFound");
 
   const searching = e.target.value.toLowerCase();
 
@@ -179,19 +180,19 @@ function filterNotes(e) {
   [...tasks].forEach(task => {
     const taskContent = task.children[1].innerText;
     if (taskContent.toLowerCase().includes(searching)) {
-      task.style.display = 'flex';
+      task.style.display = "flex";
     } else {
-      task.style.display = 'none';
+      task.style.display = "none";
     }
 
     console.log(task.children[1].firstElementChild.innerText);
   });
 
   const result = [...tasks].every(task => {
-    return task.style.display === 'none';
+    return task.style.display === "none";
   });
 
   result === true
-    ? (notFound.style.display = 'block')
-    : (notFound.style.display = 'none');
+    ? (notFound.style.display = "block")
+    : (notFound.style.display = "none");
 }

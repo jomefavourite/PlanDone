@@ -1,11 +1,14 @@
 .modal {
-  // padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
 
   img {
+    display: block;
     width: 20px;
     margin-left: auto;
     margin-bottom: 1rem;
     cursor: pointer;
+    max-width: 1000px;
   }
 }
 
@@ -24,13 +27,14 @@ form .title {
 form button {
   display: block;
   width: 100%;
+  margin-bottom: 3rem;
 }
 
 form * + * {
   margin-top: 1rem;
 }
 
-input[name='topic'] {
+input[name="topic"] {
   margin-bottom: 1rem;
 }
 
