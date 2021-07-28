@@ -39,16 +39,19 @@
             name="url"
             class="title"
             placeholder="Enter The Title"
+            required
           />
           <input
             type="text"
             name="urlName"
             id="urlName"
             placeholder="Enter Url Name"
+            required
           />
 
           <button type="submit" class="button button__add" id="addLink">
             Add Link
+            <div class="spinner icon-spinner-2" aria-hidden="true"></div>
           </button>
         </form>
       </div>
@@ -81,8 +84,7 @@
         <img src="images/link-no.svg" alt="Add link icon" />
         <h3>There are no Links here, Please add a link</h3>
       </div>
-      <% } %>
-      <% if (isAuth === false) { %>
+      <% } %> <% if (isAuth === false) { %>
       <div class="task__none task__none__offline">
         <img src="images/link-no.svg" alt="Add link icon" />
         <h3>There are no Links here, Please add a link</h3>

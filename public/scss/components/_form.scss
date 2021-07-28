@@ -38,6 +38,10 @@ input[name="topic"] {
   margin-bottom: 1rem;
 }
 
+input[type="date"] {
+  resize: none;
+}
+
 .ck-editor {
   margin-top: 1rem;
 }

@@ -8,6 +8,7 @@ const title = select(".title");
 const btnAdd = select("#addLink");
 const linksContainer = select(".links__container");
 const linkOffline = select(".task__none__offline");
+const spinner = select(".spinner");
 
 // const initialLinks = [
 //   {
@@ -31,15 +32,18 @@ createLinkBtn.addEventListener("click", () => {
 // buildLinks(links);
 
 function addLinks(e) {
-  if (title.value.length === 0 && urlName.value.length === 0) {
-    return alert("Inputs cannot be empty");
-  }
-  if (title.value.length === 0) {
-    return alert("Title cannot be empty");
-  }
-  if (urlName.value.length === 0) {
-    return alert("The URL name cannot be empty");
-  }
+  title.value && urlName.value
+    ? (spinner.style.display = "inline-block")
+    : null;
+  // if (title.value.length === 0 && urlName.value.length === 0) {
+  //   return alert("Inputs cannot be empty");
+  // }
+  // if (title.value.length === 0) {
+  //   return alert("Title cannot be empty");
+  // }
+  // if (urlName.value.length === 0) {
+  //   return alert("The URL name cannot be empty");
+  // }
 
   if (linksContainer.dataset.isauth === "false") {
     e.preventDefault();
@@ -62,6 +66,7 @@ function buildLinks(links) {
   urlName.value = "";
 
   linkOffline.style.display = "none";
+  spinner.style.display = "none";
 
   links.forEach(link => {
     linksContainer.innerHTML += `

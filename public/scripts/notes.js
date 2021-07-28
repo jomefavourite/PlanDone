@@ -38,7 +38,7 @@ document.addEventListener("click", e => {
 });
 
 function addNotes(e) {
-  spinner.style.display = "inline-block";
+  topic.value ? (spinner.style.display = "inline-block") : null;
   if (notesContainer.dataset.isauth === "false") {
     e.preventDefault();
     notes.push({topic: topic.value, description: textBox.value});
@@ -69,6 +69,7 @@ function buildNotes(notes) {
   modal.classList.remove("show");
   // style="background-color: ${clr || color.value}"
   noteOffline.style.display = "none";
+  spinner.style.display = "none"
 
   notes.forEach(note => {
     notesContainer.innerHTML += `

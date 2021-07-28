@@ -461,6 +461,10 @@ input[name=topic] {
   margin-bottom: 1rem;
 }
 
+input[type=date] {
+  resize: none;
+}
+
 .ck-editor {
   margin-top: 1rem;
 }
@@ -1292,10 +1296,6 @@ kbd {
     top: 12rem;
   }
 }
-.modal input[type=text] {
-  width: 100%;
-}
-
 .tasks__container {
   display: grid;
   margin-bottom: 3rem;

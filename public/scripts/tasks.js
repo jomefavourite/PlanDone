@@ -11,6 +11,7 @@ const btnAdd = select("#addTasks");
 const deleteCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
 const tasksContainer = select(".tasks__container");
 const taskOffline = select(".task__none__offline");
+const spinner = select(".spinner");
 
 // const initialTasks = [
 //   {
@@ -97,6 +98,10 @@ function addTasks(e) {
 
   // const tasksContainer = select('.tasks__container');
 
+  topic.value && textArea.value && date.value
+    ? (spinner.style.display = "inline-block")
+    : null;
+
   if (tasksContainer.dataset.isauth === "false") {
     e.preventDefault();
     tasks.push({
@@ -138,6 +143,7 @@ function buildTasks(tasks) {
   // textArea.value = '';
   modal.classList.remove("show");
   taskOffline.style.display = "none";
+  spinner.style.display = "none"
 
   tasks.forEach(task => {
     tasksContainer.innerHTML += `
