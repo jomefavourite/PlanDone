@@ -63,6 +63,7 @@ img {
 
 main {
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container {
@@ -296,6 +297,12 @@ main {
   content: "";
 }
 
+.spinner2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 @keyframes anim-rotate {
   0% {
     transform: rotate(0);
@@ -441,6 +448,7 @@ textarea {
   width: 100%;
   resize: vertical;
   padding: 0.5rem;
+  font-size: 1rem;
 }
 
 form .title {
@@ -945,6 +953,20 @@ input[type=date] {
   display: block;
 }
 
+.ck-content ul {
+  font-size: 1em !important;
+  padding-left: 20px;
+  font-size: "Noto Sans KR";
+  font-family: "Public Sans";
+}
+.ck-content ul li {
+  font-family: inherit;
+}
+
+.ck-content p {
+  font-size: 1rem;
+}
+
 .forecaster button {
   padding: 0.5rem 2rem !important;
 }
@@ -1307,6 +1329,7 @@ kbd {
   padding: 0 20px 20px;
   box-shadow: 0px 5px 8px rgba(92, 19, 19, 0.158);
   height: fit-content;
+  border: 1px solid rgba(92, 19, 19, 0.158);
 }
 .task + .task {
   margin-top: 1rem;

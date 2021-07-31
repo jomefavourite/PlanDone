@@ -104,6 +104,7 @@ img {
 
 main {
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container {
@@ -359,6 +360,12 @@ main {
 
 .icon-spinner-2:before {
   content: "\e001";
+}
+
+.spinner2 {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 @keyframes anim-rotate {

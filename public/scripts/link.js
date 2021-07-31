@@ -28,6 +28,11 @@ search.addEventListener("keyup", e => filterLinks(e));
 createLinkBtn.addEventListener("click", () => {
   modal.classList.toggle("show");
 });
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("delete__off")) {
+    return removeLink(e.target.parentElement.parentElement);
+  }
+});
 
 // buildLinks(links);
 
@@ -81,7 +86,7 @@ function buildLinks(links) {
         <button class="link__delete">
           <img
             data_id="<%= link.id %>"
-            class="delete"
+            class="delete__off"
             src="../images/delete_icon.svg"
             alt="delete icon"
           />
@@ -89,6 +94,14 @@ function buildLinks(links) {
       </div>
     `;
   });
+}
+
+function removeLink(e) {
+  links = links.filter(link => {
+    let linkName = e.querySelector("h5").textContent;
+    return linkName !== link.title;
+  });
+  buildLinks(links);
 }
 
 function filterLinks(e) {

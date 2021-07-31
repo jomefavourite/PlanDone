@@ -56,10 +56,15 @@
             id="<% if (isAuth) {%>textarea<% } else {%>textbox<%} %>"
             cols="30"
             rows="10"
-            placeholder="//Write a note here"
+            placeholder="Write your notes here"
           ></textarea>
 
-          <button type="submit" class="button button__add" id="addNote">
+          <button
+            type="submit"
+            class="button button__add"
+            id="addNote"
+            aria-label="Add note"
+          >
             Add note
             <div class="spinner icon-spinner-2" aria-hidden="true"></div>
           </button>
@@ -82,6 +87,10 @@
               src="../images/delete_icon.svg"
               alt="delete icon"
             />
+            <div
+              class="spinner spinner2 icon-spinner-2"
+              aria-hidden="true"
+            ></div>
           </button>
         </div>
         <% })} %>

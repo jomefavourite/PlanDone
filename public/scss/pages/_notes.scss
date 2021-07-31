@@ -147,3 +147,18 @@
 .show {
   display: block;
 }
+
+.ck-content ul {
+  font-size: 1em !important;
+  padding-left: 20px;
+  font-size: "Noto Sans KR";
+  font-family: "Public Sans";
+
+  li {
+    font-family: inherit;
+  }
+}
+
+.ck-content p {
+  font-size: 1rem;
+}

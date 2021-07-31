@@ -36,6 +36,12 @@ search.addEventListener("keyup", e => filterNotes(e));
 createTasksBtn.addEventListener("click", () => {
   modal.classList.toggle("show");
 });
+document.addEventListener("click", e => {
+  if (e.target.id === "checkbox") {
+    return removeTasks(e.target.parentElement);
+  }
+});
+
 deleteCheckBoxes.forEach(checkbox => {
   checkbox.addEventListener("click", e => {
     const endpoint = `/tasks/${checkbox.attributes[0].nodeValue}`;
@@ -49,28 +55,6 @@ deleteCheckBoxes.forEach(checkbox => {
       .catch(err => console.error(err));
   });
 });
-
-// document.addEventListener('click', e => {
-//   if (e.target.classList.value === 'times' || e.target.id === 'checkbox') {
-//     return removeTasks(e.target);
-//   }
-
-// if (e.target.innerHTML === 'Edit') {
-//   const editableText = select('p[contenteditable="false"]');
-//   const saveIcon = select('.save-icon');
-
-//   console.log(e.target);
-
-//   editableText.setAttribute('contenteditable', 'true');
-//   editableText.addEventListener('keyup', e => {
-//     tasks[0].description = e.target.innerText;
-//   });
-
-//   saveIcon.addEventListener('click', () => {
-//     localStorage.setItem('tasks', JSON.stringify(tasks));
-//   });
-// }
-// });
 
 // const tasksContainer = selectAll('.task');
 
@@ -143,7 +127,7 @@ function buildTasks(tasks) {
   // textArea.value = '';
   modal.classList.remove("show");
   taskOffline.style.display = "none";
-  spinner.style.display = "none"
+  spinner.style.display = "none";
 
   tasks.forEach(task => {
     tasksContainer.innerHTML += `
@@ -160,19 +144,15 @@ function buildTasks(tasks) {
     </div>
   `;
   });
-
-  console.log(tasks);
 }
 
 function removeTasks(e) {
   tasks = tasks.filter(task => {
-    let topic = e.parentElement.querySelector("h2").textContent;
-
-    console.log(topic);
-    // return topic !== task.topic;
+    let topic = e.querySelector("h2").textContent;
+    return topic !== task.topic;
   });
+  buildTasks(tasks);
 
-  // buildTasks(tasks);
   // localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 

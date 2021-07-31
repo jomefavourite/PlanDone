@@ -69,7 +69,7 @@ function buildNotes(notes) {
   modal.classList.remove("show");
   // style="background-color: ${clr || color.value}"
   noteOffline.style.display = "none";
-  spinner.style.display = "none"
+  spinner.style.display = "none";
 
   notes.forEach(note => {
     notesContainer.innerHTML += `
