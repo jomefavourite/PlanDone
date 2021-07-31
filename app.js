@@ -8,9 +8,9 @@ const MongoStore = require("connect-mongo");
 const {ensureAuth, ensureGuest} = require("./middleware/auth");
 require("./config/auth");
 
-const Note = require("./models/Notes");
-const Task = require("./models/Tasks");
-const Link = require("./models/Links");
+const Note = require("./models/Notes.js");
+const Task = require("./models/Tasks.js");
+const Link = require("./models/Links.js");
 
 // Load Config
 dotenv.config({path: "./.env"});
