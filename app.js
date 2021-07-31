@@ -5,12 +5,14 @@ const methodOverride = require("method-override");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const MongoStore = require("connect-mongo");
-const {ensureAuth, ensureGuest} = require("./middleware/auth");
-require("./config/auth");
 
-const Note = require("./models/Notes.js");
-const Task = require("./models/Tasks.js");
-const Link = require("./models/Links.js");
+const Note = require("/models/Notes.");
+const Task = require("/models/Tasks.");
+const Link = require("/models/Links.");
+
+const {ensureAuth, ensureGuest} = require("./middleware/auth");
+
+require("./config/auth");
 
 // Load Config
 dotenv.config({path: "./.env"});
