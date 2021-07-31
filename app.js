@@ -6,9 +6,9 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const MongoStore = require("connect-mongo");
 
-const Note = require("/models/Notes.");
-const Task = require("/models/Tasks.");
-const Link = require("/models/Links.");
+const Note = require("/models/Notes");
+const Task = require("/models/Tasks");
+const Link = require("/models/Links");
 
 const {ensureAuth, ensureGuest} = require("./middleware/auth");
 
