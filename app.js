@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const MongoStore = require("connect-mongo");
 const noteRoutes = require("./routes/noteRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const linkRoutes = require("./routes/linkRoutes");
 
 const {ensureAuth, ensureGuest} = require("./middleware/auth");
 
@@ -97,7 +98,7 @@ app.get("/gpa-forecaster", (req, res) => {
 });
 
 // Link Route
-app.use("/links", taskRoutes);
+app.use("/links", linkRoutes);
 
 // Auth with Google
 app.get("/auth/google", passport.authenticate("google", {scope: ["profile"]}));
