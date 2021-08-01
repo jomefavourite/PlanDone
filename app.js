@@ -5,10 +5,8 @@ const methodOverride = require("method-override");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const MongoStore = require("connect-mongo");
-
-const Note = require("/models/Notes");
-const Task = require("/models/Tasks");
-const Link = require("/models/Links");
+const noteRoutes = require("./routes/noteRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 
 const {ensureAuth, ensureGuest} = require("./middleware/auth");
 
@@ -81,110 +79,11 @@ app.get("/plandone", ensureAuth, (req, res) => {
   });
 });
 
-app.get("/notes", (req, res) => {
-  Note.find()
-    .then(data => {
-      res.render("notes", {
-        title: "Create Notes - PlanDone",
-        firstName: req.isAuthenticated() ? req.user.firstName : "",
-        displayName: req.isAuthenticated() ? req.user.displayName : "",
-        picture: req.isAuthenticated() ? req.user.image : "",
-        isAuth: req.isAuthenticated(),
-        notes: req.isAuthenticated() ? data : "",
-        activePath: req.url,
-      });
-    })
-    .catch(err => {
-      console.error(err);
-    });
-});
+// Note Route
+app.use("/notes", noteRoutes);
 
-// app.get('/notes/:id', (req, res) => {
-//   res.redirect('/notes');
-// });
-
-app.post("/notes", (req, res) => {
-  const note = new Note(req.body);
-
-  note
-    .save()
-    .then(() => {
-      res.redirect("/notes");
-    })
-    .catch(err => console.error(err));
-});
-
-app.delete("/notes/:id", (req, res) => {
-  const id = req.params.id;
-
-  Note.findByIdAndDelete(id)
-    .then(() => {
-      res.json({redirect: "/notes"});
-      // res.redirect('/notes');
-    })
-    .catch(err => console.error(err));
-});
-
-app.get("/notes/edit/:id", (req, res) => {
-  Note.findById(req.params.id).then(result => {
-    res.render("edit-note", {
-      note: result,
-      title: "Edit note",
-      firstName: req.isAuthenticated() ? req.user.firstName : "",
-      displayName: req.isAuthenticated() ? req.user.displayName : "",
-      picture: req.isAuthenticated() ? req.user.image : "",
-      isAuth: req.isAuthenticated(),
-      activePath: req.url,
-    });
-  });
-});
-
-app.put("/notes/edit/:id", ensureAuth, (req, res) => {
-  Note.findOneAndUpdate({_id: req.params.id}, req.body, {
-    new: true,
-    runValidators: true,
-  }).then(() => res.redirect("/notes"));
-});
-
-app.get("/tasks", (req, res) => {
-  Task.find()
-    .then(data => {
-      res.render("tasks", {
-        title: "Create Tasks - PlanDone",
-        firstName: req.isAuthenticated() ? req.user.firstName : "",
-        displayName: req.isAuthenticated() ? req.user.displayName : "",
-        picture: req.isAuthenticated() ? req.user.image : "",
-        isAuth: req.isAuthenticated(),
-        tasks: req.isAuthenticated() ? data : "",
-        activePath: req.url,
-      });
-    })
-    .catch(err => {
-      console.error(err);
-    });
-});
-
-app.post("/tasks", (req, res) => {
-  const task = new Task(req.body);
-
-  task
-    .save()
-    .then(() => {
-      res.redirect("/tasks");
-    })
-    .catch(err => console.error(err));
-});
-
-app.delete("/tasks/:id", (req, res) => {
-  const id = req.params.id;
-
-  Task.findByIdAndDelete(id)
-    .then(() => {
-      res.json({redirect: "/tasks"});
-      // res.redirect('/notes');
-    })
-    .catch(err => console.error(err));
-});
+// Task Route
+app.use("/tasks", taskRoutes);
 
 app.get("/gpa-forecaster", (req, res) => {
   res.render("forecaster", {
@@ -197,45 +96,8 @@ app.get("/gpa-forecaster", (req, res) => {
   });
 });
 
-app.get("/links", (req, res) => {
-  Link.find()
-    .then(data => {
-      res.render("link", {
-        title: "Create Links - PlanDone",
-        firstName: req.isAuthenticated() ? req.user.firstName : "",
-        displayName: req.isAuthenticated() ? req.user.displayName : "",
-        picture: req.isAuthenticated() ? req.user.image : "",
-        isAuth: req.isAuthenticated(),
-        links: req.isAuthenticated() ? data : "",
-        activePath: req.url,
-      });
-    })
-    .catch(err => {
-      console.error(err);
-    });
-});
-
-app.post("/links", (req, res) => {
-  const link = new Link(req.body);
-
-  link
-    .save()
-    .then(() => {
-      res.redirect("/links");
-    })
-    .catch(err => console.error(err));
-});
-
-app.delete("/links/:id", (req, res) => {
-  const id = req.params.id;
-
-  Link.findByIdAndDelete(id)
-    .then(() => {
-      res.json({redirect: "/links"});
-      // res.redirect('/notes');
-    })
-    .catch(err => console.error(err));
-});
+// Link Route
+app.use("/links", taskRoutes);
 
 // Auth with Google
 app.get("/auth/google", passport.authenticate("google", {scope: ["profile"]}));
