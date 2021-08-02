@@ -7,9 +7,8 @@
   "description": "PlanDone is made for Students who would like to learn smart, be productive and access everything they need while studying in one place.",
   "main": "app.js",
   "scripts": {
-    "dev": "concurrently \"nodemon app.js\" \"sass public/scss:public/css --watch\"",
     "start": "node app.js",
-    "build": "node app.js"
+    "dev": "concurrently \"nodemon app.js\" \"sass public/scss:public/css --watch\""
   },
   "keywords": [],
   "author": "",
