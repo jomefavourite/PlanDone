@@ -14,7 +14,7 @@ const {ensureAuth, ensureGuest} = require("./middleware/auth");
 require("./config/auth");
 
 // Load Config
-dotenv.config({path: "./.env"});
+dotenv.config({path: "/.env"});
 
 connectDB();
 
