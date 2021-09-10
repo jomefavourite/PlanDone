@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Note.find()
-    .then(data => {
+    .then((data) => {
       res.render("notes", {
         title: "Create Notes - PlanDone",
         firstName: req.isAuthenticated() ? req.user.firstName : "",
@@ -15,8 +15,9 @@ router.get("/", (req, res) => {
         notes: req.isAuthenticated() ? data : "",
         activePath: req.url,
       });
+      console.log(req, "req");
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 });
@@ -33,11 +34,11 @@ router.post("/", (req, res) => {
     .then(() => {
       res.redirect("/notes");
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 router.get("/edit/:id", (req, res) => {
-  Note.findById(req.params.id).then(result => {
+  Note.findById(req.params.id).then((result) => {
     res.render("edit-note", {
       note: result,
       title: "Edit note",
@@ -51,7 +52,7 @@ router.get("/edit/:id", (req, res) => {
 });
 
 router.put("/edit/:id", (req, res) => {
-  Note.findOneAndUpdate({_id: req.params.id}, req.body, {
+  Note.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,
     runValidators: true,
   }).then(() => res.redirect("/notes"));
@@ -62,10 +63,10 @@ router.delete("/:id", (req, res) => {
 
   Note.findByIdAndDelete(id)
     .then(() => {
-      res.json({redirect: "/notes"});
+      res.json({ redirect: "/notes" });
       // res.redirect('/notes');
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 module.exports = router;

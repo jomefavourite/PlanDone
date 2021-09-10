@@ -9,12 +9,12 @@ const noteRoutes = require("./routes/noteRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const linkRoutes = require("./routes/linkRoutes");
 
-const {ensureAuth, ensureGuest} = require("./middleware/auth");
+const { ensureAuth, ensureGuest } = require("./middleware/auth");
 
 require("./config/auth");
 
 // Load Config
-dotenv.config({path: "/.env"});
+dotenv.config({ path: "/.env" });
 
 connectDB();
 
@@ -31,7 +31,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   })
 ); // the secret should be in an environment variable
 
@@ -47,7 +47,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 // Body parser
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // Method Override
 app.use(
@@ -101,7 +101,10 @@ app.get("/gpa-forecaster", (req, res) => {
 app.use("/links", linkRoutes);
 
 // Auth with Google
-app.get("/auth/google", passport.authenticate("google", {scope: ["profile"]}));
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
 
 // Google auth Callback
 app.get(

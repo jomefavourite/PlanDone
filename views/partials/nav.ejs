@@ -2,23 +2,37 @@
   <a href="/" class="logo">
     <img src="/images/PlanDone.svg" alt="plan done logo" />
   </a>
-
   <div class="nav">
     <ul class="nav__list">
       <li class="nav__list__item">
-        <a href="/" class="<% if (activePath === "/" || activePath === "/plandone") {%>active<%}%>">Home</a>
+        <a
+          href="/"
+          class="<% if(activePath === '/' || activePath === '/plandone') {%>active<%}%>"
+        >
+          Home
+        </a>
       </li>
       <li class="nav__list__item">
-        <a href="/notes" class="<% if (activePath === "/notes") {%>active<%}%>">Notes</a>
+        <a href="/notes" class="<% if (activePath === '/notes') {%>active<%}%>"
+          >Notes</a
+        >
       </li>
       <li class="nav__list__item">
-        <a href="/tasks" class="<% if (activePath === "/tasks") {%>active<%}%>">Tasks</a>
+        <a href="/tasks" class="<% if (activePath === '/tasks') {%>active<%}%>"
+          >Tasks</a
+        >
       </li>
       <li class="nav__list__item">
-        <a href="/gpa-forecaster" class="<% if (activePath === "/gpa-forecaster") {%>active<%}%>">CGPA Forecaster</a>
+        <a
+          href="/gpa-forecaster"
+          class="<% if (activePath === '/gpa-forecaster') {%>active<%}%>"
+          >CGPA Forecaster</a
+        >
       </li>
       <li class="nav__list__item">
-        <a href="/links" class="<% if (activePath === "/links") {%>active<%}%>">Links</a>
+        <a href="/links" class="<% if (activePath === '/links') {%>active<%}%>"
+          >Links</a
+        >
       </li>
       <% if (isAuth === false) { %>
       <!-- <li class="nav__list__item signIn">
