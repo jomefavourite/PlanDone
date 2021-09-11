@@ -72,6 +72,10 @@ main {
   margin: 0 auto;
 }
 
+.desc__search input:disabled {
+  background-color: rgba(44, 44, 44, 0.13);
+}
+
 .active {
   font-weight: bold;
 }
@@ -123,7 +127,6 @@ main {
 }
 .desc__search .search {
   background: #fff url("../images/search.svg") no-repeat 8px center;
-  border: 1px solid black;
   border-radius: 10px;
   width: 40px;
   padding-left: 25px;
@@ -196,6 +199,7 @@ main {
 
 .alert {
   position: absolute;
+  bottom: 20px;
   background: linear-gradient(to right, #ff4b2b, #ff416c);
   width: 90%;
   border-radius: 10px;
@@ -207,38 +211,26 @@ main {
 .alert img {
   width: 40px;
 }
-.alert ::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background: #000;
-  width: 100%;
-  height: 10px;
-  opacity: 0.3;
-  border-radius: 0 0 10px 10px;
-  animation: alertTime 2000ms linear infinite;
+.alert div {
+  display: flex;
+  justify-content: space-between;
+}
+.alert div img:nth-of-type(2) {
+  width: 30px;
 }
 @media (min-width: 768px) {
   .alert {
-    display: none;
     align-items: center;
     width: 500px;
-    height: 80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
   .alert h3 {
     font-size: 18px;
   }
 }
 
-@keyframes alertTime {
-  from {
-    width: 100%;
-  }
-  to {
-    width: 0;
-  }
-}
 .note__none,
 .task__none,
 .link__none {
@@ -1127,6 +1119,10 @@ section + section {
   z-index: 3000;
 }
 
+.forecast__form {
+  width: 100%;
+}
+
 .modal-forecaster {
   background: white;
   border-radius: 10px;
@@ -1142,9 +1138,6 @@ section + section {
   margin-bottom: 1rem;
 }
 .modal-forecaster div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 20px;
 }
 .modal-forecaster div label {

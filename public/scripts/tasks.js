@@ -1,4 +1,4 @@
-import {select, selectAll, checkLocalStorage} from "../util/init.js";
+import { select, selectAll, checkLocalStorage } from "../util/init.js";
 
 const topic = select("#topic");
 const textArea = select("#textarea");
@@ -12,6 +12,7 @@ const deleteCheckBoxes = document.querySelectorAll('input[type="checkbox"]');
 const tasksContainer = select(".tasks__container");
 const taskOffline = select(".task__none__offline");
 const spinner = select(".spinner");
+const alertContainer = select(".alert");
 
 // const initialTasks = [
 //   {
@@ -32,27 +33,30 @@ let tasks = [];
 // buildTasks(tasks);
 
 btnAdd.addEventListener("click", addTasks);
-search.addEventListener("keyup", e => filterNotes(e));
+search.addEventListener("keyup", (e) => filterNotes(e));
 createTasksBtn.addEventListener("click", () => {
   modal.classList.toggle("show");
 });
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
   if (e.target.id === "checkbox") {
     return removeTasks(e.target.parentElement);
   }
+  if (e.target.classList.contains("closeAlert")) {
+    alertContainer.style.display = "none";
+  }
 });
 
-deleteCheckBoxes.forEach(checkbox => {
-  checkbox.addEventListener("click", e => {
+deleteCheckBoxes.forEach((checkbox) => {
+  checkbox.addEventListener("click", (e) => {
     const endpoint = `/tasks/${checkbox.attributes[0].nodeValue}`;
 
     fetch(endpoint, {
       method: "DELETE",
     })
-      .then(res => {
+      .then((res) => {
         window.location.href = "/tasks";
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   });
 });
 
@@ -129,7 +133,7 @@ function buildTasks(tasks) {
   taskOffline.style.display = "none";
   spinner.style.display = "none";
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     tasksContainer.innerHTML += `
     <div class="task" data-aos="fade-up">
       <input data_id="<%= task.id %>" type="checkbox" id="checkbox" title="mark completed" />
@@ -144,10 +148,14 @@ function buildTasks(tasks) {
     </div>
   `;
   });
+
+  if (tasks.length === 1) {
+    alertContainer.style.display = "block";
+  }
 }
 
 function removeTasks(e) {
-  tasks = tasks.filter(task => {
+  tasks = tasks.filter((task) => {
     let topic = e.querySelector("h2").textContent;
     return topic !== task.topic;
   });
@@ -159,11 +167,12 @@ function removeTasks(e) {
 function filterNotes(e) {
   const tasks = selectAll(".task");
   const notFound = select(".notFound");
+  const tasksContainer = select(".tasks__container");
 
   const searching = e.target.value.toLowerCase();
 
   // Filters the notes
-  [...tasks].forEach(task => {
+  [...tasks]?.forEach((task) => {
     const taskContent = task.children[1].innerText;
     if (taskContent.toLowerCase().includes(searching)) {
       task.style.display = "flex";
@@ -174,11 +183,15 @@ function filterNotes(e) {
     console.log(task.children[1].firstElementChild.innerText);
   });
 
-  const result = [...tasks].every(task => {
+  const result = [...tasks].every((task) => {
     return task.style.display === "none";
   });
 
-  result === true
-    ? (notFound.style.display = "block")
-    : (notFound.style.display = "none");
+  if (result === true) {
+    notFound.style.display = "block";
+    tasksContainer.style.display = "none";
+  } else {
+    notFound.style.display = "none";
+    tasksContainer.style.display = "grid";
+  }
 }

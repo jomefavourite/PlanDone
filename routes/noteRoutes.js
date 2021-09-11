@@ -13,9 +13,8 @@ router.get("/", (req, res) => {
         picture: req.isAuthenticated() ? req.user.image : "",
         isAuth: req.isAuthenticated(),
         notes: req.isAuthenticated() ? data : "",
-        activePath: req.url,
+        activePath: "/notes",
       });
-      console.log(req, "req");
     })
     .catch((err) => {
       console.error(err);
@@ -46,7 +45,7 @@ router.get("/edit/:id", (req, res) => {
       displayName: req.isAuthenticated() ? req.user.displayName : "",
       picture: req.isAuthenticated() ? req.user.image : "",
       isAuth: req.isAuthenticated(),
-      activePath: req.url,
+      activePath: "/notes",
     });
   });
 });

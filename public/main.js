@@ -20,12 +20,12 @@ hamburger.addEventListener("click", () => {
   document.body.classList.toggle("overflow");
 });
 
-navLists.forEach(navList => {
+navLists.forEach((navList) => {
   navList.addEventListener("click", () => {
     document.body.classList.remove("overflow");
   });
 });
 
-closeModal.addEventListener("click", () => {
+closeModal?.addEventListener("click", () => {
   modal.classList.remove("show");
 });

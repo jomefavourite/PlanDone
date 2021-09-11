@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
     .then(() => {
       res.redirect("/links");
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 router.delete("/:id", (req, res) => {
@@ -19,15 +19,15 @@ router.delete("/:id", (req, res) => {
 
   Link.findByIdAndDelete(id)
     .then(() => {
-      res.json({redirect: "/links"});
+      res.json({ redirect: "/links" });
       // res.redirect('/notes');
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 router.get("/", (req, res) => {
   Link.find()
-    .then(data => {
+    .then((data) => {
       res.render("link", {
         title: "Create Links - PlanDone",
         firstName: req.isAuthenticated() ? req.user.firstName : "",
@@ -35,10 +35,10 @@ router.get("/", (req, res) => {
         picture: req.isAuthenticated() ? req.user.image : "",
         isAuth: req.isAuthenticated(),
         links: req.isAuthenticated() ? data : "",
-        activePath: req.url,
+        activePath: "/links",
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 });

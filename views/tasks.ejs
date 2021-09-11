@@ -6,6 +6,17 @@
       <!-- Nav -->
       <%- include('./partials/nav.ejs') %>
 
+      <div class="alert">
+        <div class="">
+          <img src="./images/alarm.svg" alt="alarm" />
+          <img src="/images/cross.svg" alt="closeAlert" class="closeAlert" />
+        </div>
+        <h3>
+          Beware! the tasks added aren't saved, please sign in to save your
+          notes
+        </h3>
+      </div>
+
       <section class="desc__heading">
         <% if (isAuth) { %>
         <h2><%- firstName %>'s Tasks</h2>
@@ -14,6 +25,16 @@
         <% } %>
         <div class="desc__content">
           <div class="desc__search">
+            <% if (tasks.length <= 0) { %>
+            <input
+              class="search"
+              type="search"
+              name="search"
+              id="search"
+              disabled
+              placeholder="Search Task Name"
+            />
+            <% } else { %>
             <input
               class="search"
               type="search"
@@ -21,6 +42,7 @@
               id="search"
               placeholder="Search Task Name"
             />
+            <% } %>
           </div>
           <button class="button createNotes" id="">
             <span class="createNotes__text">Create Tasks</span>

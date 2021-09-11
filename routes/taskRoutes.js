@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Task.find()
-    .then(data => {
+    .then((data) => {
       res.render("tasks", {
         title: "Create Tasks - PlanDone",
         firstName: req.isAuthenticated() ? req.user.firstName : "",
@@ -13,10 +13,10 @@ router.get("/", (req, res) => {
         picture: req.isAuthenticated() ? req.user.image : "",
         isAuth: req.isAuthenticated(),
         tasks: req.isAuthenticated() ? data : "",
-        activePath: req.url,
+        activePath: "/tasks",
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 });
@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
     .then(() => {
       res.redirect("/tasks");
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 router.delete("/:id", (req, res) => {
@@ -37,10 +37,10 @@ router.delete("/:id", (req, res) => {
 
   Task.findByIdAndDelete(id)
     .then(() => {
-      res.json({redirect: "/tasks"});
+      res.json({ redirect: "/tasks" });
       // res.redirect('/notes');
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 module.exports = router;

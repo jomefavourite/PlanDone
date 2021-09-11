@@ -7,9 +7,12 @@
       <%- include('./partials/nav.ejs') %>
 
       <div class="alert">
-        <img src="./images/alarm.svg" alt="alarm" />
+        <div class="">
+          <img src="./images/alarm.svg" alt="alarm" />
+          <img src="/images/cross.svg" alt="closeAlert" class="closeAlert" />
+        </div>
         <h3>
-          Beware your notes added aren't saved, please sign in to save your
+          Beware! the notes added aren't saved, please sign in to save your
           notes
         </h3>
       </div>
@@ -23,13 +26,24 @@
 
         <div class="desc__content">
           <div class="desc__search">
+            <% if (notes.length <= 0) { %>
             <input
               class="search"
               type="search"
               name="search"
               id="search"
-              placeholder="Search Note Topic"
+              disabled
+              placeholder="Search Task Name"
             />
+            <% } else { %>
+            <input
+              class="search"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search Task Name"
+            />
+            <% } %>
           </div>
           <button class="button createNotes" id="">
             <span class="createNotes__text">Create Notes</span>

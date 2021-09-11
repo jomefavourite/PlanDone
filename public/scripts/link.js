@@ -1,4 +1,4 @@
-import {select, selectAll, checkLocalStorage} from "../util/init.js";
+import { select, selectAll, checkLocalStorage } from "../util/init.js";
 
 const urlName = select("#urlName");
 const createLinkBtn = select(".createLinks");
@@ -9,6 +9,7 @@ const btnAdd = select("#addLink");
 const linksContainer = select(".links__container");
 const linkOffline = select(".task__none__offline");
 const spinner = select(".spinner");
+const alertContainer = select(".alert");
 
 // const initialLinks = [
 //   {
@@ -24,13 +25,16 @@ const spinner = select(".spinner");
 let links = [];
 
 btnAdd.addEventListener("click", addLinks);
-search.addEventListener("keyup", e => filterLinks(e));
+search.addEventListener("keyup", (e) => filterLinks(e));
 createLinkBtn.addEventListener("click", () => {
   modal.classList.toggle("show");
 });
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete__off")) {
     return removeLink(e.target.parentElement.parentElement);
+  }
+  if (e.target.classList.contains("closeAlert")) {
+    alertContainer.style.display = "none";
   }
 });
 
@@ -52,7 +56,7 @@ function addLinks(e) {
 
   if (linksContainer.dataset.isauth === "false") {
     e.preventDefault();
-    links.push({title: title.value, urlname: urlName.value});
+    links.push({ title: title.value, urlname: urlName.value });
     buildLinks(links);
   }
 
@@ -73,7 +77,7 @@ function buildLinks(links) {
   linkOffline.style.display = "none";
   spinner.style.display = "none";
 
-  links.forEach(link => {
+  links.forEach((link) => {
     linksContainer.innerHTML += `
       <div class="link">
         <a href=${link.urlname} data-aos="fade-up">
@@ -94,10 +98,14 @@ function buildLinks(links) {
       </div>
     `;
   });
+
+  if (links.length === 1) {
+    alertContainer.style.display = "block";
+  }
 }
 
 function removeLink(e) {
-  links = links.filter(link => {
+  links = links.filter((link) => {
     let linkName = e.querySelector("h5").textContent;
     return linkName !== link.title;
   });
@@ -107,11 +115,12 @@ function removeLink(e) {
 function filterLinks(e) {
   const links = selectAll(".link");
   const notFound = select(".notFound");
+  const linksContainer = select(".links__container");
 
   const searching = e.target.value.toLowerCase();
 
   // Filters the links
-  [...links].forEach(link => {
+  [...links].forEach((link) => {
     console.log(link);
     const linkContent = link.lastElementChild.innerText;
     if (linkContent.toLowerCase().includes(searching)) {
@@ -121,27 +130,31 @@ function filterLinks(e) {
     }
   });
 
-  const result = [...links].every(link => {
+  const result = [...links].every((link) => {
     return link.style.display === "none";
   });
 
-  result === true
-    ? (notFound.style.display = "block")
-    : (notFound.style.display = "none");
+  if (result === true) {
+    notFound.style.display = "block";
+    linksContainer.style.display = "none";
+  } else {
+    notFound.style.display = "none";
+    linksContainer.style.display = "grid";
+  }
 }
 
 const deleteIcons = document.querySelectorAll(".link__delete img");
 
-deleteIcons.forEach(deleteIcon => {
-  deleteIcon.addEventListener("click", e => {
+deleteIcons.forEach((deleteIcon) => {
+  deleteIcon.addEventListener("click", (e) => {
     const endpoint = `/links/${deleteIcon.attributes[0].nodeValue}`;
 
     fetch(endpoint, {
       method: "DELETE",
     })
-      .then(res => {
+      .then((res) => {
         window.location.href = "/links";
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   });
 });

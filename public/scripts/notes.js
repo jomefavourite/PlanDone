@@ -1,4 +1,4 @@
-import {select, selectAll} from "../util/init.js";
+import { select, selectAll } from "../util/init.js";
 
 const topic = select("#topic");
 const textArea = select("#textarea");
@@ -11,6 +11,7 @@ const closeModal = select(".closeModal");
 const notesContainer = select(".notes__container");
 const noteOffline = select(".note__none__offline");
 const spinner = select(".spinner");
+const alertContainer = select(".alert");
 
 // let initialNotes = [
 //   {topic: 'Demo', description: 'Hello everyone'},
@@ -24,16 +25,19 @@ let notes = [];
 // buildNotes(notes);
 
 btnAdd.addEventListener("click", addNotes);
-search.addEventListener("keyup", e => filterNotes(e));
+search.addEventListener("keyup", (e) => filterNotes(e));
 createNotesBtn.addEventListener("click", () => {
   modal.classList.toggle("show");
 });
 closeModal.addEventListener("click", () => {
   modal.classList.toggle("show");
 });
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete__off")) {
     return removeNote(e.target.parentElement);
+  }
+  if (e.target.classList.contains("closeAlert")) {
+    alertContainer.style.display = "none";
   }
 });
 
@@ -41,7 +45,7 @@ function addNotes(e) {
   topic.value ? (spinner.style.display = "inline-block") : null;
   if (notesContainer.dataset.isauth === "false") {
     e.preventDefault();
-    notes.push({topic: topic.value, description: textBox.value});
+    notes.push({ topic: topic.value, description: textBox.value });
     // localStorage.setItem('notes', JSON.stringify(notes));
     buildNotes(notes);
   }
@@ -71,7 +75,7 @@ function buildNotes(notes) {
   noteOffline.style.display = "none";
   spinner.style.display = "none";
 
-  notes.forEach(note => {
+  notes.forEach((note) => {
     notesContainer.innerHTML += `
     <div class="note" data-aos="fade-up">
       <h2>${note.topic}</h2>
@@ -83,10 +87,20 @@ function buildNotes(notes) {
     </div>
   `;
   });
+
+  if (notes.length === 1) {
+    alertContainer.style.display = "block";
+  }
+
+  // if (notes.length > 0) {
+  //   let inputDisabled = select("input[disabled]");
+  //   console.log(inputDisabled);
+  //   inputDisabled.disabled = false;
+  // }
 }
 
 function removeNote(e) {
-  notes = notes.filter(note => {
+  notes = notes.filter((note) => {
     let topic = e.parentElement.querySelector("h2").textContent;
     return topic !== note.topic;
   });
@@ -97,11 +111,12 @@ function removeNote(e) {
 function filterNotes(e) {
   const notes = selectAll(".note");
   const notFound = select(".notFound");
+  const notesContainer = select(".notes__container");
 
   const searching = e.target.value.toLowerCase();
 
   // Filters the notes
-  [...notes].forEach(note => {
+  [...notes].forEach((note) => {
     const noteContent = note.firstElementChild.innerText;
     if (noteContent.toLowerCase().includes(searching)) {
       note.style.display = "block";
@@ -110,13 +125,17 @@ function filterNotes(e) {
     }
   });
 
-  const result = [...notes].every(note => {
+  const result = [...notes].every((note) => {
     return note.style.display === "none";
   });
 
-  result === true
-    ? (notFound.style.display = "block")
-    : (notFound.style.display = "none");
+  if (result === true) {
+    notFound.style.display = "block";
+    notesContainer.style.display = "none";
+  } else {
+    notFound.style.display = "none";
+    notesContainer.style.display = "grid";
+  }
 }
 
 ClassicEditor.create(textArea ? textArea : "", {
@@ -132,22 +151,22 @@ ClassicEditor.create(textArea ? textArea : "", {
     "undo",
     "redo",
   ],
-}).catch(error => {
+}).catch((error) => {
   console.error(error);
 });
 
 const deleteIcons = document.querySelectorAll(".note__delete img");
 
-deleteIcons.forEach(deleteIcon => {
-  deleteIcon.addEventListener("click", e => {
+deleteIcons.forEach((deleteIcon) => {
+  deleteIcon.addEventListener("click", (e) => {
     const endpoint = `/notes/${deleteIcon.attributes[0].nodeValue}`;
 
     fetch(endpoint, {
       method: "DELETE",
     })
-      .then(res => {
+      .then((res) => {
         window.location.href = "/notes";
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
   });
 });
