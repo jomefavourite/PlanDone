@@ -1,14 +1,14 @@
-<center>
-  <img src="./public/images/PlanDone-white.svg" alt="plandone">
-</center>
+<p align="center">
+<img src="./public/images/PlanDone-white.svg" alt="plandone" >
+</p>
 
 ---
 
-<center>
+<p align="center">
   <a href="https://plandone-student.herokuapp.com/">View Demo</a> | 
   <a href="https://github.com/jomefavourite/PlanDone/issues">Report a Bug</a>  |
   <a href="https://github.com/jomefavourite/PlanDone/pulls">Contribute</a>
-</center>
+</p>
 
 ## Introducing PlanDone
 
