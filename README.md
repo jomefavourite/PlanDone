@@ -2,6 +2,8 @@
 <img src="./public/images/PlanDone-white.svg" alt="plandone" >
 </p>
 
+<img src="./public/images/plandone-cover.png" alt="plandone cover" />
+
 ---
 
 <p align="center">
@@ -16,7 +18,7 @@ PlanDone is a platform made for Students who would like to learn smart, be produ
 
 By giving students the ability to save their notes, tasks and forecast their Cumulative Grade Point Average (CGPA) score, which can all be accessed at any time. So now you can make sure you Plan and then complete (Done)
 
-[Read the article to find out more about PlanDone]()
+[Read the article to find out more about PlanDone](https://favouritejome.hashnode.dev/introducing-plandone-getting-plans-done)
 
 ## Demo
 
@@ -69,12 +71,12 @@ You are all set! Open [localhost:3000](http://localhost:3000/) to see the app.
 
 ## Built With
 
-- **[Node.js]()** for authentication,
-- **[Express]()** for
-- **[EJS]()** - template engine
-- **[SASS]()** -
-- **[MongoDD/Mongoose]()** for storing data
-- **[Heroku]()** for hosting the application
+- **[Node.js](https://nodejs.org/en/)** for authentication, routing.
+- **[Express](https://expressjs.com/)** for ease while working with Node.js
+- **[EJS](https://ejs.co/)**: A template engine language that generates HTML markup with plain JavaScript.
+- **[SASS](https://sass-lang.com/)**: Sass is a preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets.
+- **[MongoDD/Mongoose](https://www.mongodb.com/)** for managing, storing or retrieving information.
+- **[Heroku](http://heroku.com/)** for hosting the application.
 
 ## 🛡️ License
 
