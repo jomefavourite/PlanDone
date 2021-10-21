@@ -63,7 +63,7 @@ app.use(
 
 app.get("/", ensureGuest, (req, res) => {
   res.render("index", {
-    title: "PlanDone - Student Productive Website",
+    title: "PlanDone - Student Productive Website ",
     isAuth: req.isAuthenticated(),
     activePath: req.url,
   });
