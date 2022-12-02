@@ -76,7 +76,7 @@ You are all set! Open [localhost:3000](http://localhost:3000/) to see the app.
 - **[EJS](https://ejs.co/)**: A template engine language that generates HTML markup with plain JavaScript.
 - **[SASS](https://sass-lang.com/)**: Sass is a preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets.
 - **[MongoDD/Mongoose](https://www.mongodb.com/)** for managing, storing or retrieving information.
-- **[Heroku](http://heroku.com/)** for hosting the application.
+- **[Render](https://render.com/)** for hosting the application.
 
 ## 🛡️ License
 
